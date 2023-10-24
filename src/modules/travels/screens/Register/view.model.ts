@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { RegisterModel } from "./models";
 
-const useRegisterViewModel = () => {
+const useRegisterViewModel = (): RegisterModel => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [firstName, setFirstName] = useState<string>('');
@@ -8,13 +9,15 @@ const useRegisterViewModel = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const onSubmit = async () => {
-        console.log({email, password, firstName, lastName})
         try {
             setIsLoading(true);
+            console.log({email, password, firstName, lastName})
         } catch (err) {
             console.log(err);
         } finally {
-            setIsLoading(false);
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 2000)
         }
     }
 
@@ -28,7 +31,7 @@ const useRegisterViewModel = () => {
         setFirstName,
         setLastName,
         onSubmit,
-        isLoading
+        isLoading,
     }
 }
 

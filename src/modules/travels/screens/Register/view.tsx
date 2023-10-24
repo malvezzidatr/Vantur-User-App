@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, TextInput, View, Text } from "react-native";
+import { ActivityIndicator } from "react-native";
 import useRegisterViewModel from './view.model';
 import { Input } from "../../components/commom/input/Input";
 import { Button } from "../../components/commom/button/Button";
@@ -17,6 +17,14 @@ export const RegisterView = () => {
         setLastName,
         setPassword
     } = useRegisterViewModel();
+    
+    if (isLoading) {
+        return (
+            <S.Container justifyContent>
+                <ActivityIndicator size={"large"} />
+            </S.Container>
+        )
+    }
 
     return (
         <S.Container>
