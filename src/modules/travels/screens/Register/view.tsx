@@ -4,6 +4,7 @@ import useRegisterViewModel from './view.model';
 import { Input } from "../../components/commom/input/Input";
 import { Button } from "../../components/commom/button/Button";
 import * as S from './styles';
+import { TextLink } from "../../components/commom/textLink/TextLink";
 
 export const RegisterView = () => {
     const {email,
@@ -62,16 +63,20 @@ export const RegisterView = () => {
                 setValue={setPassword}
                 placeholder="Digite sua senha"
                 style={{
-                    marginBottom: 135
+                    marginBottom: 20
+                }}
+            />
+            <Input
+                labelText="Senha"
+                value={password}
+                setValue={setPassword}
+                placeholder="Digite sua senha"
+                style={{
+                    marginBottom: 100
                 }}
             />
             <Button onClick={onSubmit} text="Cadastrar"/>
-            <S.LinkContainer>
-                <S.Link>Já possui uma conta? </S.Link>
-                <S.LinkPressable>
-                    <S.LinkBold>Entre Agora.</S.LinkBold>
-                </S.LinkPressable>
-            </S.LinkContainer>
+            <TextLink firstText="Já possui uma conta? " linkText="Entre agora."/>
         </S.Container>
     )
 }
