@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState } from 'react';
 import * as S from './styles';
 import { TextInputProps, ViewStyle } from 'react-native';
 
@@ -7,7 +7,10 @@ interface InputProps extends TextInputProps {
     placeholder: string;
     value: string;
     setValue: React.Dispatch<React.SetStateAction<string>>;
-    style?: ViewStyle;
+    inputStyle?: ViewStyle;
+    error?: boolean;
+    errorMessage?: string;
+    onBlur?: () => void;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -15,10 +18,21 @@ export const Input: React.FC<InputProps> = ({
     placeholder,
     value,
     setValue,
-    style
+    inputStyle,
+    error,
+    errorMessage,
+    onBlur,
+    ...props
 }): JSX.Element => {
+    const [emptyError, setEmptyError] = useState<boolean>();
+
+    const defaultOnBlur = () => {
+        const shouldShowEmptyError = !(value);
+        setEmptyError(shouldShowEmptyError);
+    }
+
     return (
-        <S.Container>
+        <S.Container {...props}>
             <S.Text>{ labelText }</S.Text>
             <S.Input
                 style={[{
@@ -30,11 +44,19 @@ export const Input: React.FC<InputProps> = ({
                     shadowOpacity: 0.25,
                     shadowRadius: 3.84,
                     elevation: 5
-                }, style]}
+                }, inputStyle]}
                 placeholder={placeholder}
                 value={value}
                 onChangeText={setValue}
+                error={error || emptyError}
+                onBlur={onBlur ?? defaultOnBlur}
             />
+            {
+                error && <S.ErrorText>{errorMessage ?? 'Algo está errado com este campo'}</S.ErrorText>
+            }
+            {
+                emptyError ? <S.ErrorText>Este campo não pode ficar vazio</S.ErrorText> : <S.ErrorText></S.ErrorText>
+            }
         </S.Container>
     )
 }

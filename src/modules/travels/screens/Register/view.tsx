@@ -36,47 +36,36 @@ export const RegisterView = () => {
                 value={firstName}
                 setValue={setFirstName}
                 placeholder="Digite seu primeiro nome"
-                style={{
-                    marginBottom: 20
-                }}
             />
             <Input
                 labelText="Sobrenome"
                 value={lastName}
                 setValue={setLastName}
                 placeholder="Digite seu sobrenome"
-                style={{
-                    marginBottom: 20
-                }}
+                style={{marginTop: 8}}
             />
             <Input
                 labelText="E-mail"
                 value={email}
                 setValue={setEmail}
                 placeholder="Digite seu e-mail"
-                style={{
-                    marginBottom: 20
-                }}
+                style={{marginTop: 8}}
             />
             <Input
                 labelText="Senha"
                 value={password}
                 setValue={setPassword}
                 placeholder="Digite sua senha"
-                style={{
-                    marginBottom: 20
-                }}
+                style={{marginTop: 8}}
             />
             <Input
                 labelText="Senha"
                 value={password}
                 setValue={setPassword}
                 placeholder="Digite sua senha"
-                style={{
-                    marginBottom: 100
-                }}
+                style={{marginTop: 8}}
             />
-            <Button disabled={buttonIsDisabled} onClick={onSubmit} text="Cadastrar"/>
+            <Button style={{marginTop: 40}} disabled={buttonIsDisabled} onClick={onSubmit} text="Cadastrar"/>
             <TextLink firstText="Já possui uma conta? " linkText="Entre agora."/>
         </S.Container>
     )
