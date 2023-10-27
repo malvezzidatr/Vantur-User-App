@@ -1,9 +1,11 @@
-import { AxiosPromise } from 'axios';
+import axios, { AxiosPromise } from 'axios';
 import api from '../services/api';
 
 export function useService() {
     const auth = '';
-    function get(url: string, data: any, query: string): AxiosPromise {
+    const apiURL = process.env.EXPO_PUBLIC_API_URL_LOCAL;
+
+    async function get(url: string, data: any, query: string): AxiosPromise {
         return api.get(`${url}${query}`, {
             data,
             headers: {
@@ -12,9 +14,8 @@ export function useService() {
         })
     }
 
-    function post(url: string, data: any): AxiosPromise {
-        return api.post(`${url}`, {
-            data,
+    async function post(url: string, data: any): AxiosPromise {
+        return api.post(url, data, {
             headers: {
                 Authorization: `Bearer ${auth}`
             }
@@ -22,8 +23,7 @@ export function useService() {
     }
 
     function put(url: string, data: any): AxiosPromise {
-        return api.put(`${url}`, {
-            data,
+        return api.put(url, data, {
             headers: {
                 Authorization: `Bearer ${auth}`
             }
