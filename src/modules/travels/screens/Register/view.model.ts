@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RegisterModel } from "./models";
+import { createUser } from "../../services/User/requests";
 
 const useRegisterViewModel = (): RegisterModel => {
     const [email, setEmail] = useState<string>('');
@@ -7,19 +8,29 @@ const useRegisterViewModel = (): RegisterModel => {
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [buttonIsDisabled, setButtonIsDisabled] = useState<boolean>(true);
 
     const onSubmit = async () => {
         try {
             setIsLoading(true);
-            console.log({email, password, firstName, lastName})
-        } catch (err) {
-            console.log(err);
+            const data = {
+                firstName,
+                lastName,
+                email,
+                password
+            }
+            await createUser(data)
+        } catch (err: any) {
+            console.error(err?.response?.data?.message);
         } finally {
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 2000)
+            setIsLoading(false);
         }
-    }
+    };
+
+    useEffect(() => {
+        const shouldDisableButton = !(email && password && firstName && lastName);
+        setButtonIsDisabled(shouldDisableButton);
+    }, [email, password, firstName, lastName]);
 
     return {
         email,
@@ -32,6 +43,7 @@ const useRegisterViewModel = (): RegisterModel => {
         setLastName,
         onSubmit,
         isLoading,
+        buttonIsDisabled
     }
 }
 

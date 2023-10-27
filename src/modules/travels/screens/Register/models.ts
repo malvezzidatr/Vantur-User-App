@@ -11,4 +11,5 @@ export interface RegisterModel {
     setLastName: React.Dispatch<React.SetStateAction<string>>;
     isLoading: boolean;
     onSubmit: () => void;
+    buttonIsDisabled: boolean;
 }

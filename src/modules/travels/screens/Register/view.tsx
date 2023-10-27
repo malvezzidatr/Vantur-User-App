@@ -16,7 +16,8 @@ export const RegisterView = () => {
         setEmail,
         setFirstName,
         setLastName,
-        setPassword
+        setPassword,
+        buttonIsDisabled
     } = useRegisterViewModel();
     
     if (isLoading) {
@@ -75,7 +76,7 @@ export const RegisterView = () => {
                     marginBottom: 100
                 }}
             />
-            <Button onClick={onSubmit} text="Cadastrar"/>
+            <Button disabled={buttonIsDisabled} onClick={onSubmit} text="Cadastrar"/>
             <TextLink firstText="Já possui uma conta? " linkText="Entre agora."/>
         </S.Container>
     )

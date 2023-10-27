@@ -1,9 +1,8 @@
-import axios, { AxiosPromise } from 'axios';
+import { AxiosPromise } from 'axios';
 import api from '../services/api';
 
 export function useService() {
     const auth = '';
-    const apiURL = process.env.EXPO_PUBLIC_API_URL_LOCAL;
 
     async function get(url: string, data: any, query: string): AxiosPromise {
         return api.get(`${url}${query}`, {
