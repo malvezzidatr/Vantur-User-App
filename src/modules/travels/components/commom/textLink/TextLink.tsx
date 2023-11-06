@@ -1,5 +1,6 @@
 import React from "react";
 import * as S from './styles';
+import { Link } from 'react-router-native';
 
 interface TextLinkProps {
     firstText: string;
@@ -12,10 +13,10 @@ export const TextLink: React.FC<TextLinkProps> = ({
 }): JSX.Element => {
     return (
         <S.LinkContainer>
-            <S.Link>{firstText}</S.Link>
-            <S.LinkPressable>
+            <S.LinkText>{firstText}</S.LinkText>
+            <S.Link to='/login'>
                 <S.LinkBold>{linkText}</S.LinkBold>
-            </S.LinkPressable>
+            </S.Link>
         </S.LinkContainer>
     )
 }

@@ -1,9 +1,9 @@
 import styled from "styled-components/native";
 
-export const Button = styled.TouchableOpacity`
+export const Button = styled.TouchableOpacity<{disabled?: boolean}>`
     width: 100%;
     height: 56px;
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme, disabled }) => disabled ? 'gray' : theme.colors.primary};
     border-radius: 8px;
     align-items: center;
     justify-content: center;
