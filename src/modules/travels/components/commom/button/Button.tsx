@@ -9,7 +9,7 @@ interface ButtonProps extends TouchableOpacityProps {
 
 export const Button: React.FC<ButtonProps> = ({ text, onClick, ...props }): JSX.Element => {
     return (
-        <S.Button {...props} onPress={onClick}>
+        <S.Button testID="button" {...props} onPress={onClick}>
             <S.ButtonText>{ text }</S.ButtonText>
         </S.Button>
     )

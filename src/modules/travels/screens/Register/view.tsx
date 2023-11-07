@@ -6,8 +6,9 @@ import { Button } from "../../components/commom/button/Button";
 import * as S from './styles';
 import { TextLink } from "../../components/commom/textLink/TextLink";
 
-export const RegisterView = () => {
-    const {email,
+export const RegisterView: React.FC = (): JSX.Element => {
+    const {
+        email,
         password,
         firstName,
         lastName,
@@ -22,7 +23,7 @@ export const RegisterView = () => {
     
     if (isLoading) {
         return (
-            <S.Container justifyContent>
+            <S.Container testID="loading" justifyContent>
                 <ActivityIndicator size={"large"} />
             </S.Container>
         )
@@ -62,11 +63,11 @@ export const RegisterView = () => {
                 labelText="Senha"
                 value={password}
                 setValue={setPassword}
-                placeholder="Digite sua senha"
+                placeholder="Digite sua senha novamente"
                 style={{marginTop: 8}}
             />
             <Button style={{marginTop: 40}} disabled={buttonIsDisabled} onClick={onSubmit} text="Cadastrar"/>
-            <TextLink firstText="Já possui uma conta? " linkText="Entre agora."/>
+            {/* <TextLink firstText="Já possui uma conta? " linkText="Entre agora."/> */}
         </S.Container>
     )
 }
