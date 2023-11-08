@@ -1,14 +1,12 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
-import { RegisterView } from '../view';  // Importe como 'typeof RegisterView'
+import { render } from '@testing-library/react-native';
+import { RegisterView } from '../view';
 import useRegisterViewModel from '../view.model';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from '../../../../../theme';
 
-// Mock o módulo useRegisterViewModel para simular seu comportamento
 jest.mock('../view.model');
 
-// Defina o método mockReturnValue no módulo mock
 const mockUseRegisterViewModel = useRegisterViewModel as jest.Mock;
 mockUseRegisterViewModel.mockReturnValue({
   email: '',

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
 import * as S from './styles';
 import { Card } from '../../components/Home/card/card';
 
