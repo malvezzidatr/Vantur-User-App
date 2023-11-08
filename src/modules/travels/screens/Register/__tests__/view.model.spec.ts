@@ -23,7 +23,9 @@ describe('useRegisterViewModel', () => {
   });
 
   it('deve chamar createUser e atualizar o estado ao chamar onSubmit', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useRegisterViewModel());
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useRegisterViewModel(),
+    );
 
     act(() => {
       result.current.setEmail('test@example.com');
@@ -63,30 +65,34 @@ describe('useRegisterViewModel', () => {
   });
 
   it('deve lidar com erro ao chamar createUser', async () => {
-      const { result, waitForNextUpdate } = renderHook(() => useRegisterViewModel());
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useRegisterViewModel(),
+    );
 
-      act(() => {
-          result.current.setEmail('test@example.com');
-          result.current.setPassword('password123');
-          result.current.setFirstName('John');
-          result.current.setLastName('Doe');
-      });
+    act(() => {
+      result.current.setEmail('test@example.com');
+      result.current.setPassword('password123');
+      result.current.setFirstName('John');
+      result.current.setLastName('Doe');
+    });
 
-      const errorMessage = 'Mensagem de erro';
-      mockCreateUser.mockRejectedValue({ response: { data: { message: errorMessage } } });
+    const errorMessage = 'Mensagem de erro';
+    mockCreateUser.mockRejectedValue({
+      response: { data: { message: errorMessage } },
+    });
 
-      await act(async () => {
-          result.current.onSubmit();
-          await waitForNextUpdate();
-      });
+    await act(async () => {
+      result.current.onSubmit();
+      await waitForNextUpdate();
+    });
 
-      expect(mockCreateUser).toHaveBeenCalledWith({
-          firstName: 'John',
-          lastName: 'Doe',
-          email: 'test@example.com',
-          password: 'password123',
-      });
+    expect(mockCreateUser).toHaveBeenCalledWith({
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'test@example.com',
+      password: 'password123',
+    });
 
-      expect(result.current.isLoading).toBe(false);
+    expect(result.current.isLoading).toBe(false);
   });
 });

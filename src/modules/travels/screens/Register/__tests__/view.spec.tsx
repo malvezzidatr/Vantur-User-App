@@ -27,7 +27,7 @@ describe('RegisterView', () => {
     const { getByText, getByPlaceholderText } = render(
       <ThemeProvider theme={theme}>
         <RegisterView />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
     expect(getByText('Cadastro')).toBeTruthy();
@@ -45,9 +45,9 @@ describe('RegisterView', () => {
     const { getByTestId } = render(
       <ThemeProvider theme={theme}>
         <RegisterView />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
-    expect(getByTestId('loading')).toBeTruthy()
-  })
+    expect(getByTestId('loading')).toBeTruthy();
+  });
 });
