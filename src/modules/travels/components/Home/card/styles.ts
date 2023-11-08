@@ -10,8 +10,8 @@ export const Container = styled.View<{status: 'full' | 'empty' | 'almost'}>`
         const { status, theme } = props;
 
         const statusColorMap = {
-          full: theme.colors.primary,
-          empty: theme.colors.blue,
+          full: theme.colors.error,
+          empty: theme.colors.success,
           almost: theme.colors.warn
         };
       

@@ -7,6 +7,8 @@ declare module 'styled-components/native' {
       white: '#fff',
       blue: '#B6E7F2',
       warn: '#F2CD5C',
+      success: '#54D99F',
+      error: '#D96262',
     }
   }
 }
