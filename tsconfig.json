@@ -1,7 +1,7 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-native",
     "strict": true,
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/theme/**/*.d.ts", "src/modules/travels/screens/Register/__tests__/view.spec.tsx"]
