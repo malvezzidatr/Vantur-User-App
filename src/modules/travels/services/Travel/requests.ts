@@ -6,6 +6,6 @@ const { get } = useService();
 export const getAllTravels = async (): Promise<Travel[]> => {
     const response = await get('/travel', {}, '');
     const travels: Travel[] = response.data;
-    console.log(travels)
+
     return travels;
 }

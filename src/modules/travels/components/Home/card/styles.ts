@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-export const Container = styled.View<{status: 'full' | 'empty' | 'almost'}>`
+export const Container = styled.TouchableOpacity<{status: 'full' | 'empty' | 'almost'}>`
     height: 120px;
     border-radius: 15px;
     flex-direction: row;
@@ -19,6 +19,7 @@ export const Container = styled.View<{status: 'full' | 'empty' | 'almost'}>`
       
         return backgroundColor;
     }};
+    margin-bottom: 20px;
 `
 
 export const ValueContainer = styled.View`
@@ -78,6 +79,7 @@ export const Spots = styled.Text`
     font-size: 24px;
     font-weight: 700;
     margin-left: 32px;
+    text-transform: capitalize;
 `
 
 export const PlacesContainer = styled.View`

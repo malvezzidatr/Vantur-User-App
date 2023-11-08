@@ -2,7 +2,21 @@ import React from 'react';
 import * as S from './styles';
 import { Text } from 'react-native';
 
-export const Card: React.FC = (): JSX.Element => {
+export interface ICardProps {
+    value: string;
+    destination: string;
+    seats: number;
+    reserveds: number;
+    owner: string;
+}
+
+export const Card: React.FC<ICardProps> = ({
+    value,
+    destination,
+    seats,
+    reserveds = 0,
+    owner
+}): JSX.Element => {
     return (
         <S.Container 
             style={[{
@@ -20,7 +34,7 @@ export const Card: React.FC = (): JSX.Element => {
         >
             <S.ValueContainer>
                 <S.TextsContainer>
-                    <S.ValueText>R$ 150,00</S.ValueText>
+                    <S.ValueText>R$ {value}</S.ValueText>
                     <S.DateHourContainer>
                         <S.DateText>23/09/2023</S.DateText>
                         <S.HourText>17h00</S.HourText>
@@ -30,21 +44,21 @@ export const Card: React.FC = (): JSX.Element => {
             <S.InfoContainer>
                 <S.TravelContainer>
                     <S.SpotsContainer>
-                        <S.Spots>Guarujá</S.Spots>
+                        <S.Spots>{destination}</S.Spots>
                     </S.SpotsContainer>
                 </S.TravelContainer>
                 <S.PlacesContainer>
                     <S.InfosContainer>
                         <S.TitleInfo>Assentos</S.TitleInfo>
-                        <S.Info>15</S.Info>
+                        <S.Info>{seats}</S.Info>
                     </S.InfosContainer>
                     <S.InfosContainer>
                         <S.TitleInfo>Reservados</S.TitleInfo>
-                        <S.Info>12</S.Info>
+                        <S.Info>{reserveds}</S.Info>
                     </S.InfosContainer>
                     <S.InfosContainer>
                         <S.TitleInfo>Organizador</S.TitleInfo>
-                        <S.Info>Caio Malvezzi</S.Info>
+                        <S.Info>{owner}</S.Info>
                     </S.InfosContainer>
                 </S.PlacesContainer>
             </S.InfoContainer>
