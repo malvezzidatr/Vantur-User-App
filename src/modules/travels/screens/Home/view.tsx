@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import { Card } from '../../components/Home/card/card';
 import { FlatList, RefreshControl } from 'react-native';
@@ -7,16 +7,17 @@ import { SearchBar } from '../../components/Home/searchBar/searchBar';
 import { Travel } from '../../services/Travel/interfaces';
 
 export const HomeView: React.FC = (): JSX.Element => {
-  const { travels, onRefresh, refreshing, search, setSearch } = useHomeViewModel();
+  const { travels, onRefresh, refreshing, search, setSearch } =
+    useHomeViewModel();
 
   const [searchResult, setSearchResult] = useState<Travel[]>();
 
   useEffect(() => {
-    const filteredTravels = travels.filter(travel =>
-      travel.destination.toLowerCase().includes(search.toLowerCase())
+    const filteredTravels = travels.filter((travel) =>
+      travel.destination.toLowerCase().includes(search.toLowerCase()),
     );
 
-    setSearchResult(filteredTravels)
+    setSearchResult(filteredTravels);
   }, [search, travels]);
 
   return (
@@ -24,10 +25,10 @@ export const HomeView: React.FC = (): JSX.Element => {
       <S.HelloGuy>Ola,{'\n'}Pessoa!</S.HelloGuy>
       <S.SearchBarContainer>
         <SearchBar
-          placeholder='Procure seu destino aqui...'
+          placeholder="Procure seu destino aqui..."
           value={search}
           setValue={setSearch}
-          inputStyle={{marginBottom: 30}}
+          inputStyle={{ marginBottom: 30 }}
         />
       </S.SearchBarContainer>
       <S.EventTitle>Eventos</S.EventTitle>

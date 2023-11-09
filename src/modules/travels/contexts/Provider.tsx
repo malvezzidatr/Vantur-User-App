@@ -8,23 +8,22 @@ interface ContextProviderProps {
 }
 
 const ContextProvider: FC<ContextProviderProps> = ({ children }) => {
+  const getStorageValue = async (key: string) => {
+    return await SecureStore.getItemAsync(key);
+  };
 
-    const getStorageValue = async (key: string) => {
-        return await SecureStore.getItemAsync(key);
-    }
+  const setStorageValue = async (key: string, value: string) => {
+    await SecureStore.setItemAsync(key, value);
+  };
 
-    const setStorageValue = async (key: string, value: string) => {
-        await SecureStore.setItemAsync(key, value);
-    }
-
-    const deleteStorageValue = async (key: string) => {
-        await SecureStore.deleteItemAsync(key);
-    }
+  const deleteStorageValue = async (key: string) => {
+    await SecureStore.deleteItemAsync(key);
+  };
 
   const contextValue = useMemo(
-    () => ({ getStorageValue, setStorageValue }),
-    [getStorageValue, setStorageValue]
-  )
+    () => ({ getStorageValue, setStorageValue, deleteStorageValue }),
+    [getStorageValue, setStorageValue, deleteStorageValue],
+  );
 
   return (
     <StorageContext.Provider value={contextValue}>

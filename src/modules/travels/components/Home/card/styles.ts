@@ -81,21 +81,21 @@ export const SpotsContainer = styled.View`
   width: 100%;
 `;
 
-export const Icon = styled(MaterialIcon).attrs(props => ({
+export const Icon = styled(MaterialIcon).attrs((props) => ({
   color: props.theme.colors.primary,
 }))`
   transform: rotate(-90deg);
   margin-right: -12px;
-`
+`;
 
-export const Spots = styled.Text<{border?: boolean}>`
+export const Spots = styled.Text<{ border?: boolean }>`
   color: ${({ theme }) => theme.colors.primary};
   font-size: 16px;
   font-weight: 700;
   text-transform: capitalize;
   padding-bottom: 4px;
-  border-bottom-width: ${props => props.border ? '0.8px' : '0'};
-  border-style: ${props => props.border ? 'dashed' : 'null'};
+  border-bottom-width: ${(props) => (props.border ? '0.8px' : '0')};
+  border-style: ${(props) => (props.border ? 'dashed' : 'null')};
   width: 80%;
 `;
 

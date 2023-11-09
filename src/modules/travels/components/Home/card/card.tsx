@@ -48,7 +48,7 @@ export const Card: React.FC<ICardProps> = ({
       </S.ValueContainer>
       <S.InfoContainer>
         <S.TravelContainer>
-          <S.Icon name='undo' size={16}/>
+          <S.Icon name="undo" size={16} />
           <View>
             <S.SpotsContainer>
               <S.Spots border>{departure}</S.Spots>

@@ -1,16 +1,21 @@
-import React, {SetStateAction} from 'react';
-import {ViewStyle} from 'react-native'
+import React, { SetStateAction } from 'react';
+import { ViewStyle } from 'react-native';
 import * as S from './styles';
 
 export interface ISearchBarProps {
-    placeholder: string;
-    value: string;
-    setValue: React.Dispatch<SetStateAction<string>>;
-    inputStyle?: ViewStyle;
+  placeholder: string;
+  value: string;
+  setValue: React.Dispatch<SetStateAction<string>>;
+  inputStyle?: ViewStyle;
 }
 
-export const SearchBar: React.FC<ISearchBarProps> = ({ placeholder, value, setValue, inputStyle }): JSX.Element => {
-    return (
+export const SearchBar: React.FC<ISearchBarProps> = ({
+  placeholder,
+  value,
+  setValue,
+  inputStyle,
+}): JSX.Element => {
+  return (
     <S.Container>
       <S.Input
         style={[
@@ -23,12 +28,13 @@ export const SearchBar: React.FC<ISearchBarProps> = ({ placeholder, value, setVa
             shadowOpacity: 0.25,
             shadowRadius: 3.84,
             elevation: 5,
-          }, [inputStyle],
+          },
+          [inputStyle],
         ]}
         placeholder={placeholder}
         value={value}
         onChangeText={setValue}
       />
     </S.Container>
-    )
-}
+  );
+};

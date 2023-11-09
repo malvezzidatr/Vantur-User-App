@@ -7,12 +7,16 @@ interface StorageContextValue {
   deleteStorageValue: (key: string) => void;
 }
 
-const StorageContext = createContext<StorageContextValue | undefined>(undefined);
+const StorageContext = createContext<StorageContextValue | undefined>(
+  undefined,
+);
 
 export const useStorageContext = (): StorageContextValue => {
   const context = useContext(StorageContext);
   if (!context) {
-    throw new Error('useStorageContext deve ser utilizado dentro de um ContextProvider');
+    throw new Error(
+      'useStorageContext deve ser utilizado dentro de um ContextProvider',
+    );
   }
   return context;
 };

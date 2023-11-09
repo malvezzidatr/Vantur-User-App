@@ -3,7 +3,7 @@
   "compilerOptions": {
     "jsx": "react-native",
     "strict": true,
-    "typeRoots" : ["node_modules/@types", "src/types"],
+    "typeRoots": ["node_modules/@types", "src/types"],
     "target": "ES5"
   },
   "include": [

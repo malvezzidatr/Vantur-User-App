@@ -16,12 +16,11 @@ export const Button: React.FC<ButtonProps> = ({
 }): JSX.Element => {
   return (
     <S.Button testID="button" {...props} onPress={onClick}>
-      {
-        isLoading ?
-          <ActivityIndicator color={'#B6E7F2'} size={'large'} />
-          :
-          <S.ButtonText>{text}</S.ButtonText>
-      }
+      {isLoading ? (
+        <ActivityIndicator color={'#B6E7F2'} size={'large'} />
+      ) : (
+        <S.ButtonText>{text}</S.ButtonText>
+      )}
     </S.Button>
   );
 };

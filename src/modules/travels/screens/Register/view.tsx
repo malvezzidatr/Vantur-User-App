@@ -72,7 +72,11 @@ export const RegisterView: React.FC = (): JSX.Element => {
         onClick={onSubmit}
         text="Cadastrar"
       />
-      <TextLink firstText="Já possui uma conta? " linkText="Entre agora." toGo='/'/>
+      <TextLink
+        firstText="Já possui uma conta? "
+        linkText="Entre agora."
+        toGo="/"
+      />
     </S.Container>
   );
 };

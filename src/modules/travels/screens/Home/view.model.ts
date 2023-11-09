@@ -31,7 +31,7 @@ const useHomeViewModel = () => {
     travels,
     onRefresh,
     search,
-    setSearch
+    setSearch,
   };
 };
 

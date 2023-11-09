@@ -11,9 +11,9 @@ interface TextLinkProps {
 export const TextLink: React.FC<TextLinkProps> = ({
   firstText,
   linkText,
-  toGo
+  toGo,
 }): JSX.Element => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <S.LinkContainer>
       <S.LinkText>{firstText}</S.LinkText>
