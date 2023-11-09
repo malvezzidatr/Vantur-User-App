@@ -24,7 +24,7 @@ export const HomeView: React.FC = (): JSX.Element => {
       <S.HelloGuy>Ola,{'\n'}Pessoa!</S.HelloGuy>
       <S.SearchBarContainer>
         <SearchBar
-          placeholder='Procure aqui'
+          placeholder='Procure seu destino aqui...'
           value={search}
           setValue={setSearch}
           inputStyle={{marginBottom: 30}}

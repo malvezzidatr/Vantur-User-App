@@ -10,9 +10,9 @@ const Router = () => {
   return (
     <NativeRouter>
       <Routes>
-        <Route path="/" element={<HomeView />} />
+        <Route path="/home" element={<HomeView />} />
         <Route path="/register" element={<RegisterView />} />
-        <Route path="/login" element={<LoginView />} />
+        <Route path="/" element={<LoginView />} />
       </Routes>
     </NativeRouter>
   );

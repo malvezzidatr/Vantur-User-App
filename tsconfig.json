@@ -2,12 +2,14 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "jsx": "react-native",
-    "strict": true
+    "strict": true,
+    "typeRoots" : ["node_modules/@types", "src/types"],
+    "target": "ES5"
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/theme/**/*.d.ts",
-    "src/modules/travels/screens/Register/__tests__/view.spec.tsx"
+    "src/types/*.d.ts"
   ]
 }

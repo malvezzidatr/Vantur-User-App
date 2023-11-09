@@ -4,6 +4,7 @@ import useRegisterViewModel from './view.model';
 import { Input } from '../../components/commom/input/Input';
 import { Button } from '../../components/commom/button/Button';
 import * as S from './styles';
+import { TextLink } from './../../components/commom/textLink/TextLink';
 
 export const RegisterView: React.FC = (): JSX.Element => {
   const {
@@ -71,7 +72,7 @@ export const RegisterView: React.FC = (): JSX.Element => {
         onClick={onSubmit}
         text="Cadastrar"
       />
-      {/* <TextLink firstText="Já possui uma conta? " linkText="Entre agora."/> */}
+      <TextLink firstText="Já possui uma conta? " linkText="Entre agora." toGo='/'/>
     </S.Container>
   );
 };
