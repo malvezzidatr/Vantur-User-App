@@ -24,7 +24,7 @@ export const RegisterView: React.FC = (): JSX.Element => {
   if (isLoading) {
     return (
       <S.Container testID="loading" justifyContent>
-        <ActivityIndicator size={'large'} />
+        <ActivityIndicator color={'#B6E7F2'} size={'large'} />
       </S.Container>
     );
   }

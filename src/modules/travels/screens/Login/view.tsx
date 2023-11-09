@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import * as S from './styles';
 import { Image } from 'react-native';
 import {Input} from '../../components/commom/input/Input';
 import {Button} from '../../components/commom/button/Button';
 import { TextLink } from '../../components/commom/textLink/TextLink';
+import useLoginViewModel from './view.model';
 
 export const LoginView: React.FC = (): JSX.Element => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const { email, setEmail, password, setPassword, userLogin, isLoading } = useLoginViewModel();
 
   return (
     <S.Container>
@@ -30,7 +30,8 @@ export const LoginView: React.FC = (): JSX.Element => {
 
       <Button
         text='Login'
-        onClick={() => {}}
+        onClick={userLogin}
+        isLoading={isLoading}
       />
       <TextLink firstText='Não tem uma conta? ' linkText='Registre-se agora.' toGo='/register'/>
     </S.Container>
