@@ -5,6 +5,7 @@ import { Travel } from '../../services/Travel/interfaces';
 const useHomeViewModel = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [travels, setTravels] = useState<Travel[]>([]);
+  const [search, setSearch] = useState<string>('');
 
   useEffect(() => {
     getTravels();
@@ -29,6 +30,8 @@ const useHomeViewModel = () => {
     refreshing,
     travels,
     onRefresh,
+    search,
+    setSearch
   };
 };
 

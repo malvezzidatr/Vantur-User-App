@@ -103,7 +103,7 @@ export const PlacesContainer = styled.View`
   flex: 1.5;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 10px 10px 16px;
+  padding: 0 10px 14px 16px;
 `;
 
 export const InfosContainer = styled.View``;
