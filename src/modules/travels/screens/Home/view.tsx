@@ -26,6 +26,7 @@ export const HomeView: React.FC = (): JSX.Element => {
               seats={item?.seats}
               reserveds={item?.confirmeds?.length}
               owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
+              departure={item?.departure_location}
             />
           );
         }}

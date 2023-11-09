@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import MaterialIcon from '@expo/vector-icons/MaterialIcons';
 
 export const Container = styled.TouchableOpacity<{
   status: 'full' | 'empty' | 'almost';
@@ -33,6 +34,7 @@ export const ValueContainer = styled.View`
 `;
 
 export const InfoContainer = styled.View`
+  padding-top: 10px;
   flex: 2;
 `;
 
@@ -65,6 +67,8 @@ export const HourText = styled.Text`
 `;
 
 export const TravelContainer = styled.View`
+  align-items: center;
+  justify-content: center;
   flex-direction: row;
   flex: 4;
 `;
@@ -73,14 +77,26 @@ export const SpotsContainer = styled.View`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+  width: 100%;
 `;
 
-export const Spots = styled.Text`
+export const Icon = styled(MaterialIcon).attrs(props => ({
+  color: props.theme.colors.primary,
+}))`
+  transform: rotate(-90deg);
+  margin-right: -12px;
+`
+
+export const Spots = styled.Text<{border?: boolean}>`
   color: ${({ theme }) => theme.colors.primary};
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 700;
-  margin-left: 32px;
   text-transform: capitalize;
+  padding-bottom: 4px;
+  border-bottom-width: ${props => props.border ? '0.8px' : '0'};
+  border-style: ${props => props.border ? 'dashed' : 'null'};
+  width: 80%;
 `;
 
 export const PlacesContainer = styled.View`

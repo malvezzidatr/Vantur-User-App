@@ -1,5 +1,7 @@
 import React from 'react';
 import * as S from './styles';
+import Icon from '@expo/vector-icons/MaterialIcons';
+import { View } from 'react-native';
 
 export interface ICardProps {
   value: string;
@@ -7,6 +9,7 @@ export interface ICardProps {
   seats: number;
   reserveds: number;
   owner: string;
+  departure: string;
 }
 
 export const Card: React.FC<ICardProps> = ({
@@ -15,6 +18,7 @@ export const Card: React.FC<ICardProps> = ({
   seats,
   reserveds = 0,
   owner,
+  departure,
 }): JSX.Element => {
   return (
     <S.Container
@@ -44,9 +48,16 @@ export const Card: React.FC<ICardProps> = ({
       </S.ValueContainer>
       <S.InfoContainer>
         <S.TravelContainer>
-          <S.SpotsContainer>
-            <S.Spots>{destination}</S.Spots>
-          </S.SpotsContainer>
+          <S.Icon name='undo' size={16}/>
+          <View>
+            <S.SpotsContainer>
+              <S.Spots border>{departure}</S.Spots>
+            </S.SpotsContainer>
+
+            <S.SpotsContainer>
+              <S.Spots>{destination}</S.Spots>
+            </S.SpotsContainer>
+          </View>
         </S.TravelContainer>
         <S.PlacesContainer>
           <S.InfosContainer>
