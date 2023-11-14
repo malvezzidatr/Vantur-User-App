@@ -1,18 +1,28 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getAllTravels } from '../../services/Travel/requests';
 import { Travel } from '../../services/Travel/interfaces';
+import { useNavigate } from 'react-router-native';
+import { useStorageContext } from '../../contexts/useStorageContext';
 
 const useHomeViewModel = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [travels, setTravels] = useState<Travel[]>([]);
   const [search, setSearch] = useState<string>('');
+  const navigate = useNavigate();
+  const { deleteStorageValue } = useStorageContext();
 
   useEffect(() => {
     getTravels();
   }, []);
 
   const getTravels = async () => {
-    setTravels(await getAllTravels());
+    const { data, error } = await getAllTravels();
+    if (error?.response?.status === 401) {
+      deleteStorageValue('access_token');
+      navigate('/');
+    } else {
+      setTravels(data);
+    }
   };
 
   const onRefresh = useCallback(() => {
@@ -20,7 +30,7 @@ const useHomeViewModel = () => {
       setRefreshing(true);
       getTravels();
     } catch (error) {
-      console.error(error);
+      console.error('Error ao atualizar viagens: ', error);
     } finally {
       setRefreshing(false);
     }

@@ -13,8 +13,8 @@ export const HomeView: React.FC = (): JSX.Element => {
   const [searchResult, setSearchResult] = useState<Travel[]>();
 
   useEffect(() => {
-    const filteredTravels = travels.filter((travel) =>
-      travel.destination.toLowerCase().includes(search.toLowerCase()),
+    const filteredTravels = travels?.filter((travel) =>
+      travel?.destination?.toLowerCase()?.includes(search?.toLowerCase()),
     );
 
     setSearchResult(filteredTravels);

@@ -1,9 +1,9 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.KeyboardAvoidingView`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.blue};
-  padding: 60px 30px 60px;
+  padding: 30px 30px 60px;
 `;
 
 export const Title = styled.Text`
