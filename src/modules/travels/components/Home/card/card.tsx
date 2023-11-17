@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './styles';
 import Icon from '@expo/vector-icons/MaterialIcons';
 import { View } from 'react-native';
+import { Skeleton } from 'moti/skeleton';
 
 export interface ICardProps {
   value: string;
@@ -53,7 +54,6 @@ export const Card: React.FC<ICardProps> = ({
             <S.SpotsContainer>
               <S.Spots border>{departure}</S.Spots>
             </S.SpotsContainer>
-
             <S.SpotsContainer>
               <S.Spots>{destination}</S.Spots>
             </S.SpotsContainer>

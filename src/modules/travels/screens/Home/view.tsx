@@ -5,14 +5,13 @@ import { FlatList, RefreshControl } from 'react-native';
 import useHomeViewModel from './view.model';
 import { SearchBar } from '../../components/Home/searchBar/searchBar';
 import { Travel } from '../../services/Travel/interfaces';
-import { Skeleton } from 'moti/skeleton'
-import { View } from 'moti';
+import { CardSkeleton } from '../../components/Home/cardSkeleton/cardSkeleton';
 
 export const HomeView: React.FC = (): JSX.Element => {
   const { travels, onRefresh, refreshing, search, setSearch, userData } =
     useHomeViewModel();
 
-  const [searchResult, setSearchResult] = useState<Travel[]>();
+  const [searchResult, setSearchResult] = useState<Travel[]>([]);
 
   useEffect(() => {
     const filteredTravels = travels?.filter((travel) =>
@@ -21,8 +20,6 @@ export const HomeView: React.FC = (): JSX.Element => {
 
     setSearchResult(filteredTravels);
   }, [search, travels]);
-
-
 
   return (
     <S.Container>
@@ -36,13 +33,12 @@ export const HomeView: React.FC = (): JSX.Element => {
         />
       </S.SearchBarContainer>
       <S.EventTitle>Eventos</S.EventTitle>
-      
-      <Skeleton colorMode="light" show height={50} width={'100%'} radius="square">
-        {!!travels ? (
-          <View>
-          </View>
-        ) : null}
-      </Skeleton>
+      {
+        searchResult.length <= 0 &&
+          Array.from({ length: 4 }).map((_, index) => (
+            <CardSkeleton key={index} />
+          ))
+      }
       <FlatList
         contentContainerStyle={{ paddingHorizontal: 30, paddingVertical: 10 }}
         refreshControl={
@@ -54,7 +50,6 @@ export const HomeView: React.FC = (): JSX.Element => {
         renderItem={({ item }) => {
           return (
             <>
-              
               <Card
                 value={item?.value}
                 destination={item?.destination}

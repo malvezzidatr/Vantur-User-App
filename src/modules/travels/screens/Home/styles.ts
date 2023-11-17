@@ -22,4 +22,5 @@ export const EventTitle = styled.Text`
   font-size: 28px;
   font-weight: 700;
   padding: 0 30px;
+  margin-bottom: 12px;
 `;
