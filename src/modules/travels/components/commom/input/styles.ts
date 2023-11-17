@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  width: 100%;
+  width: 98%;
   align-items: center;
+  margin-left: 4px;
 `;
 
 export const Text = styled.Text`

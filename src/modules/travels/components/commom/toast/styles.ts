@@ -12,15 +12,39 @@ export const ToastContainer = styled.View`
     position: absolute;
 `
 
-export const ContentContainer = styled.View`
+export const ContentContainer = styled.View<{status: 'success' | 'warn' | 'error'}>`
     border-left-width: 8px;
-    border-left-color: ${({ theme }) => theme.colors.success};
     border-radius: 10px;
     padding: 10px 0 10px 20px;
+    border-left-color: ${(props) => {
+        const { status, theme } = props;
+
+        const statusColorMap = {
+          error: theme.colors.error,
+          success: theme.colors.success,
+          warn: theme.colors.warn,
+        };
+    
+        const backgroundColor = statusColorMap[status];
+    
+        return backgroundColor;
+    }};
 `
 
-export const Title = styled.Text`
-    color: ${({ theme }) => theme.colors.success};
+export const Title = styled.Text<{status: 'success' | 'warn' | 'error'}>`
+    color: ${(props) => {
+        const { status, theme } = props;
+
+        const statusColorMap = {
+          error: theme.colors.error,
+          success: theme.colors.success,
+          warn: theme.colors.warn,
+        };
+    
+        const backgroundColor = statusColorMap[status];
+    
+        return backgroundColor;
+    }};
     font-size: 20px;
     margin-bottom: 5px;
     font-weight: bold;

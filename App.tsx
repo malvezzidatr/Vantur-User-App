@@ -6,14 +6,17 @@ import { theme } from './src/theme';
 import Router from './src/routes/router';
 import ContextProvider from './src/modules/travels/contexts/Provider';
 import { StatusBar } from 'expo-status-bar';
+import ToastProvider from './src/modules/travels/contexts/ToastProvider';
 
 export default function App() {
   return (
-    <ContextProvider>
-      <ThemeProvider theme={theme}>
-        <StatusBar />
-        <Router />
-      </ThemeProvider>
-    </ContextProvider>
+    <ThemeProvider theme={theme}>
+      <ContextProvider>
+        <ToastProvider>
+            <StatusBar />
+            <Router />
+        </ToastProvider>
+      </ContextProvider>
+    </ThemeProvider>
   );
 }

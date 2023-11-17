@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { login } from '../../services/Login/requests';
 import { useNavigate } from 'react-router-native';
 import { useStorageContext } from '../../contexts/useStorageContext';
+import { useToast } from '../../contexts/useToast';
 
 const useLoginViewModel = () => {
   const [email, setEmail] = useState<string>('');
@@ -9,7 +10,7 @@ const useLoginViewModel = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const { getStorageValue, setStorageValue, deleteStorageValue } = useStorageContext();
+  const { getStorageValue, setStorageValue } = useStorageContext();
 
   useEffect(() => {
     const checkIfIsAlreadyLoggedIn = async () => {

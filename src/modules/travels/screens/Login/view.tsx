@@ -5,7 +5,6 @@ import { Input } from '../../components/commom/input/Input';
 import { Button } from '../../components/commom/button/Button';
 import { TextLink } from '../../components/commom/textLink/TextLink';
 import useLoginViewModel from './view.model';
-import { Toast } from '../../components/commom/toast/Toast';
 
 export const LoginView: React.FC = (): JSX.Element => {
   const { email, setEmail, password, setPassword, userLogin, isLoading } =
@@ -13,7 +12,6 @@ export const LoginView: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <Toast title='Sucesso' text='Logou com sucesso'/>
       <S.Container>
         <S.Title>Vantur</S.Title>
         <Image
