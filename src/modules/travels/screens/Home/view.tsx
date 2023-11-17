@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import { Card } from '../../components/Home/card/card';
-import { FlatList, RefreshControl } from 'react-native';
+import { FlatList, RefreshControl, Text, TouchableOpacity } from 'react-native';
 import useHomeViewModel from './view.model';
 import { SearchBar } from '../../components/Home/searchBar/searchBar';
 import { Travel } from '../../services/Travel/interfaces';
 import { CardSkeleton } from '../../components/Home/cardSkeleton/cardSkeleton';
+import { useStorageContext } from '../../contexts/useStorageContext';
 
 export const HomeView: React.FC = (): JSX.Element => {
-  const { travels, onRefresh, refreshing, search, setSearch, userData } =
+  const { travels, onRefresh, refreshing, search, setSearch, userData, searchResult } =
     useHomeViewModel();
 
-  const [searchResult, setSearchResult] = useState<Travel[]>([]);
-
-  useEffect(() => {
-    const filteredTravels = travels?.filter((travel) =>
-      travel?.destination?.toLowerCase()?.includes(search?.toLowerCase()),
-    );
-
-    setSearchResult(filteredTravels);
-  }, [search, travels]);
+  const { deleteStorageValue } = useStorageContext();
 
   return (
     <S.Container>
+      <TouchableOpacity onPress={() => deleteStorageValue('access_token')}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
       <S.HelloGuy>Ola,{'\n'}{userData?.first_name}!</S.HelloGuy>
       <S.SearchBarContainer>
         <SearchBar

@@ -15,13 +15,10 @@ const useHomeViewModel = () => {
   const [travels, setTravels] = useState<Travel[]>([]);
   const [search, setSearch] = useState<string>('');
   const [userData, setUserData] = useState<IUserData>();
+  const [searchResult, setSearchResult] = useState<Travel[]>([]);
+
   const navigate = useNavigate();
   const { deleteStorageValue, getStorageValue } = useStorageContext();
-
-  useEffect(() => {
-    getTravels();
-    getUserData();
-  }, []);
 
   const getUserData = async () => {
     const user = await getStorageValue('userData');
@@ -49,13 +46,27 @@ const useHomeViewModel = () => {
     }
   }, []);
 
+  useEffect(() => {
+    getTravels();
+    getUserData();
+  }, []);
+
+  useEffect(() => {
+    const filteredTravels = travels?.filter((travel) =>
+      travel?.destination?.toLowerCase()?.includes(search?.toLowerCase()),
+    );
+
+    setSearchResult(filteredTravels);
+  }, [search, travels]);
+
   return {
     refreshing,
     travels,
     onRefresh,
     search,
     setSearch,
-    userData
+    userData,
+    searchResult
   };
 };
 
