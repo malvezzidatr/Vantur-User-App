@@ -9,7 +9,7 @@ const useLoginViewModel = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const { getStorageValue, setStorageValue } = useStorageContext();
+  const { getStorageValue, setStorageValue, deleteStorageValue } = useStorageContext();
 
   useEffect(() => {
     const checkIfIsAlreadyLoggedIn = async () => {
@@ -24,8 +24,9 @@ const useLoginViewModel = () => {
   const userLogin = async () => {
     setIsLoading(true);
     try {
-      const token = await login({ email, password });
-      setStorageValue('access_token', token);
+      const { access_token, userData } = await login({ email, password });
+      setStorageValue('access_token', access_token);
+      setStorageValue('userData', JSON.stringify(userData));
       navigate('/home');
     } catch (error) {
       console.log(error);

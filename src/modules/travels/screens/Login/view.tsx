@@ -11,7 +11,7 @@ export const LoginView: React.FC = (): JSX.Element => {
     useLoginViewModel();
 
   return (
-    <S.Container behavior='position' enabled>
+    <S.Container>
       <S.Title>Vantur</S.Title>
       <Image
         style={{ marginBottom: 40 }}

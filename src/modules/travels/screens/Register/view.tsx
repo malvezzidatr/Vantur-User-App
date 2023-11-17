@@ -21,14 +21,6 @@ export const RegisterView: React.FC = (): JSX.Element => {
     buttonIsDisabled,
   } = useRegisterViewModel();
 
-  if (isLoading) {
-    return (
-      <S.Container testID="loading" justifyContent>
-        <ActivityIndicator color={'#B6E7F2'} size={'large'} />
-      </S.Container>
-    );
-  }
-
   return (
     <S.Container>
       <S.Title>Cadastro</S.Title>
@@ -60,7 +52,7 @@ export const RegisterView: React.FC = (): JSX.Element => {
         style={{ marginTop: 8 }}
       />
       <Input
-        labelText="Senha"
+        labelText="Repita sua senha"
         value={password}
         setValue={setPassword}
         placeholder="Digite sua senha novamente"
@@ -71,6 +63,7 @@ export const RegisterView: React.FC = (): JSX.Element => {
         disabled={buttonIsDisabled}
         onClick={onSubmit}
         text="Cadastrar"
+        isLoading={isLoading}
       />
       <TextLink
         firstText="Já possui uma conta? "

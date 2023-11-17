@@ -1,12 +1,11 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View<{ justifyContent?: boolean }>`
+export const Container = styled.ScrollView`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.blue};
   padding-top: 60px;
   padding-left: 30px;
   padding-right: 30px;
-  justify-content: ${(props) => props.justifyContent && 'center'};
 `;
 
 export const Title = styled.Text`

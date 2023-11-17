@@ -4,16 +4,29 @@ import { Travel } from '../../services/Travel/interfaces';
 import { useNavigate } from 'react-router-native';
 import { useStorageContext } from '../../contexts/useStorageContext';
 
+export interface IUserData {
+  first_name: string;
+  last_name: string;
+  id: string;
+}
+
 const useHomeViewModel = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [travels, setTravels] = useState<Travel[]>([]);
   const [search, setSearch] = useState<string>('');
+  const [userData, setUserData] = useState<IUserData>();
   const navigate = useNavigate();
-  const { deleteStorageValue } = useStorageContext();
+  const { deleteStorageValue, getStorageValue } = useStorageContext();
 
   useEffect(() => {
     getTravels();
+    getUserData();
   }, []);
+
+  const getUserData = async () => {
+    const user = await getStorageValue('userData');
+    setUserData(JSON.parse(user));
+  }
 
   const getTravels = async () => {
     const { data, error } = await getAllTravels();
@@ -42,6 +55,7 @@ const useHomeViewModel = () => {
     onRefresh,
     search,
     setSearch,
+    userData
   };
 };
 

@@ -5,9 +5,11 @@ import { FlatList, RefreshControl } from 'react-native';
 import useHomeViewModel from './view.model';
 import { SearchBar } from '../../components/Home/searchBar/searchBar';
 import { Travel } from '../../services/Travel/interfaces';
+import { Skeleton } from 'moti/skeleton'
+import { View } from 'moti';
 
 export const HomeView: React.FC = (): JSX.Element => {
-  const { travels, onRefresh, refreshing, search, setSearch } =
+  const { travels, onRefresh, refreshing, search, setSearch, userData } =
     useHomeViewModel();
 
   const [searchResult, setSearchResult] = useState<Travel[]>();
@@ -20,9 +22,11 @@ export const HomeView: React.FC = (): JSX.Element => {
     setSearchResult(filteredTravels);
   }, [search, travels]);
 
+
+
   return (
     <S.Container>
-      <S.HelloGuy>Ola,{'\n'}Pessoa!</S.HelloGuy>
+      <S.HelloGuy>Ola,{'\n'}{userData?.first_name}!</S.HelloGuy>
       <S.SearchBarContainer>
         <SearchBar
           placeholder="Procure seu destino aqui..."
@@ -32,6 +36,13 @@ export const HomeView: React.FC = (): JSX.Element => {
         />
       </S.SearchBarContainer>
       <S.EventTitle>Eventos</S.EventTitle>
+      
+      <Skeleton colorMode="light" show height={50} width={'100%'} radius="square">
+        {!!travels ? (
+          <View>
+          </View>
+        ) : null}
+      </Skeleton>
       <FlatList
         contentContainerStyle={{ paddingHorizontal: 30, paddingVertical: 10 }}
         refreshControl={
@@ -42,14 +53,17 @@ export const HomeView: React.FC = (): JSX.Element => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => {
           return (
-            <Card
-              value={item?.value}
-              destination={item?.destination}
-              seats={item?.seats}
-              reserveds={item?.confirmeds?.length}
-              owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
-              departure={item?.departure_location}
-            />
+            <>
+              
+              <Card
+                value={item?.value}
+                destination={item?.destination}
+                seats={item?.seats}
+                reserveds={item?.confirmeds?.length}
+                owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
+                departure={item?.departure_location}
+              />
+            </>
           );
         }}
       />

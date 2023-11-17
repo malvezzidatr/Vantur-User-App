@@ -3,8 +3,11 @@ import { Login } from './interfaces';
 
 const { post } = useService();
 
-export const login = async (dataLogin: Login): Promise<string> => {
+export const login = async (dataLogin: Login): Promise<any> => {
   const response = await post('/auth/login', dataLogin);
-  const token = response.data?.access_token;
-  return token;
+  const { access_token, userData } = response?.data;
+  return {
+    access_token,
+    userData
+  };
 };
