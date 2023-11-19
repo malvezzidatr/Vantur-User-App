@@ -1,9 +1,11 @@
+// PasswordInput.tsx
+
 import React, { useState } from 'react';
-import * as S from './styles';
+import * as S from './styles'; // substitua pelo caminho correto
 import { TextInputProps, ViewStyle } from 'react-native';
 import Icon, { FontAwesome5IconProps } from 'react-native-vector-icons/FontAwesome5';
 
-interface InputProps extends TextInputProps {
+interface PasswordInputProps extends TextInputProps {
   labelText: string;
   placeholder: string;
   value: string;
@@ -13,11 +15,9 @@ interface InputProps extends TextInputProps {
   errorMessage?: string;
   onBlur?: () => void;
   containerStyle?: ViewStyle;
-  icon?: FontAwesome5IconProps;
-  iconFunction?: () => void;
 }
 
-export const Input: React.FC<InputProps> = ({
+export const Input: React.FC<PasswordInputProps> = ({
   labelText,
   placeholder,
   value,
@@ -27,11 +27,14 @@ export const Input: React.FC<InputProps> = ({
   errorMessage,
   onBlur,
   containerStyle,
-  icon,
-  iconFunction,
   ...props
 }): JSX.Element => {
   const [emptyError, setEmptyError] = useState<boolean>();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const defaultOnBlur = () => {
     const shouldShowEmptyError = !value;
@@ -61,6 +64,7 @@ export const Input: React.FC<InputProps> = ({
         onChangeText={setValue}
         error={error || emptyError}
         onBlur={onBlur ?? defaultOnBlur}
+        secureTextEntry={props?.secureTextEntry && !showPassword}
       />
       {error && (
         <S.ErrorText>
@@ -73,16 +77,15 @@ export const Input: React.FC<InputProps> = ({
         <S.ErrorText></S.ErrorText>
       )}
       {
-        icon &&
-          <Icon
-            onPress={iconFunction}
-            style={{position: 'absolute', top: 40, right: 15}}
-            name={icon.name}
-            solid
-            size={18}
-            color={icon.color}
-            
-          />
+        props?.secureTextEntry &&
+        <Icon
+          onPress={togglePasswordVisibility}
+          style={{ position: 'absolute', top: 40, right: 15 }}
+          name={showPassword ? 'eye' : 'eye-slash'}
+          solid
+          size={18}
+          color="black" // ou outra cor padrão
+        />
       }
     </S.Container>
   );

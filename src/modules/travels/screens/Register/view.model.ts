@@ -1,5 +1,5 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import { RegisterModel } from './models';
+import { PsswdIconNames, RegisterModel } from './models';
 import { createUser } from '../../services/User/requests';
 import { useNavigate } from 'react-router-native';
 import { useToast } from '../../contexts/useToast';
@@ -7,27 +7,16 @@ import { useToast } from '../../contexts/useToast';
 const useRegisterViewModel = (): RegisterModel => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [repeatPassword, setRepeatPassword] = useState<string>('');
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [buttonIsDisabled, setButtonIsDisabled] = useState<boolean>(true);
-  const [psswdIconName, setPsswdIconName] = useState<'eye' | 'eye-slash'>('eye-slash');
-  const [repeatPsswdIconName, setRepeatPsswdIconName] = useState<'eye' | 'eye-slash'>('eye-slash');
   const [showPsswd, setShowPsswd] = useState<boolean>(false);
   const [showRepeatPsswd, setShowRepeatPsswd] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const { showToast } = useToast();
-
-  const changeIconPsswd = (
-    setValue: Dispatch<SetStateAction<'eye' | 'eye-slash'>>,
-    value: 'eye' | 'eye-slash',
-    setShowPassword: Dispatch<SetStateAction<boolean>>,
-    showPassword: boolean,
-  ) => {
-    setValue(value)
-    setShowPassword(!showPassword);
-  }
 
   const onSubmit = async () => {
     try {
@@ -50,7 +39,7 @@ const useRegisterViewModel = (): RegisterModel => {
   };
 
   useEffect(() => {
-    const shouldDisableButton = !(email && password && firstName && lastName);
+    const shouldDisableButton = !(email && password && firstName && lastName && repeatPassword);
     setButtonIsDisabled(shouldDisableButton);
   }, [email, password, firstName, lastName]);
 
@@ -66,15 +55,10 @@ const useRegisterViewModel = (): RegisterModel => {
     onSubmit,
     isLoading,
     buttonIsDisabled,
-    psswdIconName,
-    setPsswdIconName,
-    repeatPsswdIconName,
-    setRepeatPsswdIconName,
-    changeIconPsswd,
     showPsswd,
-    setShowPsswd,
     showRepeatPsswd,
-    setShowRepeatPsswd,
+    repeatPassword,
+    setRepeatPassword
   };
 };
 

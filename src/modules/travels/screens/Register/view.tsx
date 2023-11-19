@@ -18,15 +18,10 @@ export const RegisterView: React.FC = (): JSX.Element => {
     setLastName,
     setPassword,
     buttonIsDisabled,
-    psswdIconName,
-    repeatPsswdIconName,
-    setPsswdIconName,
-    setRepeatPsswdIconName,
-    changeIconPsswd,
     showPsswd,
-    setShowPsswd,
     showRepeatPsswd,
-    setShowRepeatPsswd
+    repeatPassword,
+    setRepeatPassword
   } = useRegisterViewModel();
 
   return (
@@ -58,19 +53,14 @@ export const RegisterView: React.FC = (): JSX.Element => {
         setValue={setPassword}
         placeholder="Digite sua senha"
         containerStyle={{ marginTop: 8 }}
-        icon={{name: psswdIconName}}
-        iconFunction={() => changeIconPsswd(setPsswdIconName, psswdIconName === 'eye' ? 'eye-slash' : 'eye', setShowPsswd, showPsswd)}
         secureTextEntry={!showPsswd}
       />
       <Input
         labelText="Repita sua senha"
-        value={password}
-        setValue={setPassword}
+        value={repeatPassword}
+        setValue={setRepeatPassword}
         placeholder="Digite sua senha novamente"
         containerStyle={{ marginTop: 8 }}
-        icon={{name: repeatPsswdIconName}}
-        iconFunction={() => 
-          changeIconPsswd(setRepeatPsswdIconName, repeatPsswdIconName === 'eye' ? 'eye-slash' : 'eye', setShowRepeatPsswd, showRepeatPsswd)}
         secureTextEntry={!showRepeatPsswd}
       />
       <Button
