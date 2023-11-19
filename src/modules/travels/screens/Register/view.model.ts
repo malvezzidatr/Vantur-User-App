@@ -39,10 +39,11 @@ const useRegisterViewModel = (): RegisterModel => {
   };
 
   useEffect(() => {
-    const shouldDisableButton = !(email && password && firstName && lastName && repeatPassword);
+    const psswdsAreEqual = password.localeCompare(repeatPassword) === 0;
+    const shouldDisableButton = !(email && password && firstName && lastName && repeatPassword && psswdsAreEqual);
     setButtonIsDisabled(shouldDisableButton);
-  }, [email, password, firstName, lastName]);
-
+  }, [email, password, firstName, lastName, repeatPassword]);
+  
   return {
     email,
     password,

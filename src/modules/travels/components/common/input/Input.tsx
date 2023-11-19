@@ -15,6 +15,7 @@ interface PasswordInputProps extends TextInputProps {
   errorMessage?: string;
   onBlur?: () => void;
   containerStyle?: ViewStyle;
+  helperText?: string;
 }
 
 export const Input: React.FC<PasswordInputProps> = ({
@@ -27,10 +28,12 @@ export const Input: React.FC<PasswordInputProps> = ({
   errorMessage,
   onBlur,
   containerStyle,
+  helperText,
   ...props
 }): JSX.Element => {
   const [emptyError, setEmptyError] = useState<boolean>();
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [focus, setFocus] = useState<boolean>(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -39,12 +42,18 @@ export const Input: React.FC<PasswordInputProps> = ({
   const defaultOnBlur = () => {
     const shouldShowEmptyError = !value;
     setEmptyError(shouldShowEmptyError);
+    setFocus(false);
   };
+
+  const defaultOnFocus = () => {
+    setFocus(true);
+  }
 
   return (
     <S.Container style={containerStyle}>
       <S.Text>{labelText}</S.Text>
       <S.Input
+        focus={focus}
         {...props}
         style={[
           {
@@ -64,6 +73,7 @@ export const Input: React.FC<PasswordInputProps> = ({
         onChangeText={setValue}
         error={error || emptyError}
         onBlur={onBlur ?? defaultOnBlur}
+        onFocus={defaultOnFocus}
         secureTextEntry={props?.secureTextEntry && !showPassword}
       />
       {error && (
@@ -73,9 +83,16 @@ export const Input: React.FC<PasswordInputProps> = ({
       )}
       {emptyError ? (
         <S.ErrorText>Este campo não pode ficar vazio</S.ErrorText>
-      ) : (
+      ) :
         <S.ErrorText></S.ErrorText>
-      )}
+      }
+      {
+        helperText && !error && !emptyError && (
+          <S.HelperText>
+            {helperText}
+          </S.HelperText>
+        )
+      }
       {
         props?.secureTextEntry &&
         <Icon
@@ -84,7 +101,7 @@ export const Input: React.FC<PasswordInputProps> = ({
           name={showPassword ? 'eye' : 'eye-slash'}
           solid
           size={18}
-          color="black" // ou outra cor padrão
+          color="black"
         />
       }
     </S.Container>
