@@ -11,12 +11,12 @@ export const Toast: React.FC<IToast> = ({ text, statusEnum }): JSX.Element => {
 
   useEffect(() => {
     const titles = {
-        success: 'Sucesso!',
-        warn: 'Aviso!',
-        error: 'Erro',
+      success: 'Sucesso!',
+      warn: 'Aviso!',
+      error: 'Erro',
     };
 
-    setTitle(titles[statusEnum])
+    setTitle(titles[statusEnum]);
   }, []);
 
   return (
@@ -40,5 +40,5 @@ export const Toast: React.FC<IToast> = ({ text, statusEnum }): JSX.Element => {
         <S.Text>{text}</S.Text>
       </S.ContentContainer>
     </S.ToastContainer>
-  )
-}
+  );
+};

@@ -1,9 +1,9 @@
 import React from 'react';
 import * as S from './styles';
 import { Image } from 'react-native';
-import { Input } from '../../components/commom/input/Input';
-import { Button } from '../../components/commom/button/Button';
-import { TextLink } from '../../components/commom/textLink/TextLink';
+import { Input } from '../../components/common/input/Input';
+import { Button } from '../../components/common/button/Button';
+import { TextLink } from '../../components/common/textLink/TextLink';
 import useLoginViewModel from './view.model';
 
 export const LoginView: React.FC = (): JSX.Element => {
@@ -31,7 +31,8 @@ export const LoginView: React.FC = (): JSX.Element => {
           placeholder="****************"
           value={password}
           setValue={setPassword}
-          style={{ marginTop: 5 }}
+          containerStyle={{ marginTop: 5 }}
+          secureTextEntry
         />
 
         <Button text="Login" onClick={userLogin} isLoading={isLoading} />

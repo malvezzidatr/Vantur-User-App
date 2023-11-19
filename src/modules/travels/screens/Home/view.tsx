@@ -4,13 +4,19 @@ import { Card } from '../../components/Home/card/card';
 import { FlatList, RefreshControl, Text, TouchableOpacity } from 'react-native';
 import useHomeViewModel from './view.model';
 import { SearchBar } from '../../components/Home/searchBar/searchBar';
-import { Travel } from '../../services/Travel/interfaces';
 import { CardSkeleton } from '../../components/Home/cardSkeleton/cardSkeleton';
 import { useStorageContext } from '../../contexts/useStorageContext';
 
 export const HomeView: React.FC = (): JSX.Element => {
-  const { travels, onRefresh, refreshing, search, setSearch, userData, searchResult } =
-    useHomeViewModel();
+  const {
+    travels,
+    onRefresh,
+    refreshing,
+    search,
+    setSearch,
+    userData,
+    searchResult,
+  } = useHomeViewModel();
 
   const { deleteStorageValue } = useStorageContext();
 
@@ -19,7 +25,10 @@ export const HomeView: React.FC = (): JSX.Element => {
       <TouchableOpacity onPress={() => deleteStorageValue('access_token')}>
         <Text>Logout</Text>
       </TouchableOpacity>
-      <S.HelloGuy>Ola,{'\n'}{userData?.first_name}!</S.HelloGuy>
+      <S.HelloGuy>
+        Ola,{'\n'}
+        {userData?.first_name}!
+      </S.HelloGuy>
       <S.SearchBarContainer>
         <SearchBar
           placeholder="Procure seu destino aqui..."
@@ -29,12 +38,10 @@ export const HomeView: React.FC = (): JSX.Element => {
         />
       </S.SearchBarContainer>
       <S.EventTitle>Eventos</S.EventTitle>
-      {
-        searchResult.length <= 0 &&
-          Array.from({ length: 4 }).map((_, index) => (
-            <CardSkeleton key={index} />
-          ))
-      }
+      {searchResult.length <= 0 &&
+        Array.from({ length: 4 }).map((_, index) => (
+          <CardSkeleton key={index} />
+        ))}
       <FlatList
         contentContainerStyle={{ paddingHorizontal: 30, paddingVertical: 10 }}
         refreshControl={

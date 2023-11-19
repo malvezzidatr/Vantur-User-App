@@ -1,10 +1,9 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
 import useRegisterViewModel from './view.model';
-import { Input } from '../../components/commom/input/Input';
-import { Button } from '../../components/commom/button/Button';
+import { Input } from '../../components/common/input/Input';
+import { Button } from '../../components/common/button/Button';
 import * as S from './styles';
-import { TextLink } from './../../components/commom/textLink/TextLink';
+import { TextLink } from '../../components/common/textLink/TextLink';
 
 export const RegisterView: React.FC = (): JSX.Element => {
   const {
@@ -19,6 +18,15 @@ export const RegisterView: React.FC = (): JSX.Element => {
     setLastName,
     setPassword,
     buttonIsDisabled,
+    psswdIconName,
+    repeatPsswdIconName,
+    setPsswdIconName,
+    setRepeatPsswdIconName,
+    changeIconPsswd,
+    showPsswd,
+    setShowPsswd,
+    showRepeatPsswd,
+    setShowRepeatPsswd
   } = useRegisterViewModel();
 
   return (
@@ -35,28 +43,35 @@ export const RegisterView: React.FC = (): JSX.Element => {
         value={lastName}
         setValue={setLastName}
         placeholder="Digite seu sobrenome"
-        style={{ marginTop: 8 }}
+        containerStyle={{ marginTop: 8 }}
       />
       <Input
         labelText="E-mail"
         value={email}
         setValue={setEmail}
         placeholder="Digite seu e-mail"
-        style={{ marginTop: 8 }}
+        containerStyle={{ marginTop: 8 }}
       />
       <Input
         labelText="Senha"
         value={password}
         setValue={setPassword}
         placeholder="Digite sua senha"
-        style={{ marginTop: 8 }}
+        containerStyle={{ marginTop: 8 }}
+        icon={{name: psswdIconName}}
+        iconFunction={() => changeIconPsswd(setPsswdIconName, psswdIconName === 'eye' ? 'eye-slash' : 'eye', setShowPsswd, showPsswd)}
+        secureTextEntry={!showPsswd}
       />
       <Input
         labelText="Repita sua senha"
         value={password}
         setValue={setPassword}
         placeholder="Digite sua senha novamente"
-        style={{ marginTop: 8 }}
+        containerStyle={{ marginTop: 8 }}
+        icon={{name: repeatPsswdIconName}}
+        iconFunction={() => 
+          changeIconPsswd(setRepeatPsswdIconName, repeatPsswdIconName === 'eye' ? 'eye-slash' : 'eye', setShowRepeatPsswd, showRepeatPsswd)}
+        secureTextEntry={!showRepeatPsswd}
       />
       <Button
         style={{ marginTop: 40 }}

@@ -4,13 +4,15 @@ import { useStorageContext } from '../../contexts/useStorageContext';
 
 const { get } = useService();
 
-
-export const getAllTravels = async (): Promise<{data: Travel[]; error: any}> => {
+export const getAllTravels = async (): Promise<{
+  data: Travel[];
+  error: any;
+}> => {
   try {
     const response = await get('/travel', {}, '');
     const travels: Travel[] = response.data;
-    return { data: travels, error: null }
+    return { data: travels, error: null };
   } catch (error) {
-    return { data: [], error}
+    return { data: [], error };
   }
 };

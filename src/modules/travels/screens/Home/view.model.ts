@@ -23,7 +23,7 @@ const useHomeViewModel = () => {
   const getUserData = async () => {
     const user = await getStorageValue('userData');
     setUserData(JSON.parse(user));
-  }
+  };
 
   const getTravels = async () => {
     const { data, error } = await getAllTravels();
@@ -52,8 +52,9 @@ const useHomeViewModel = () => {
   }, []);
 
   useEffect(() => {
-    const filteredTravels = travels?.filter((travel) =>
-      travel?.destination?.toLowerCase()?.includes(search?.toLowerCase()),
+    const filteredTravels = travels?.filter(
+      (travel) =>
+        travel?.destination?.toLowerCase()?.includes(search?.toLowerCase()),
     );
 
     setSearchResult(filteredTravels);
@@ -66,7 +67,7 @@ const useHomeViewModel = () => {
     search,
     setSearch,
     userData,
-    searchResult
+    searchResult,
   };
 };
 

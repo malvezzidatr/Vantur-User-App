@@ -12,4 +12,19 @@ export interface RegisterModel {
   isLoading: boolean;
   onSubmit: () => void;
   buttonIsDisabled: boolean;
+  psswdIconName: 'eye' | 'eye-slash';
+  setPsswdIconName: React.Dispatch<React.SetStateAction<'eye' | 'eye-slash'>>;
+  repeatPsswdIconName: 'eye' | 'eye-slash';
+  setRepeatPsswdIconName: React.Dispatch<React.SetStateAction<'eye' | 'eye-slash'>>;
+  changeIconPsswd: (
+    setValue: React.Dispatch<React.SetStateAction<'eye' | 'eye-slash'>>,
+    value: 'eye' | 'eye-slash',
+    setShowPassword: React.Dispatch<React.SetStateAction<boolean>>,
+    showPassword: boolean,
+  ) => void;
+  showPsswd: boolean;
+  setShowPsswd: React.Dispatch<React.SetStateAction<boolean>>;
+  showRepeatPsswd: boolean;
+  setShowRepeatPsswd: React.Dispatch<React.SetStateAction<boolean>>;
+
 }

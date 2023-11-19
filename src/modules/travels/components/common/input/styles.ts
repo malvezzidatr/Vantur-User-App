@@ -20,6 +20,7 @@ export const Input = styled.TextInput<{ error?: boolean }>`
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
   border: ${(props) => (props.error ? '1px solid red' : '0px')};
+  position: relative;
 `;
 
 export const ErrorText = styled.Text`

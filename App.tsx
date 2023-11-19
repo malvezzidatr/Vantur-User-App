@@ -1,5 +1,5 @@
-import 'react-native-reanimated'
-import 'react-native-gesture-handler'
+import 'react-native-reanimated';
+import 'react-native-gesture-handler';
 import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './src/theme';
@@ -13,8 +13,8 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <ContextProvider>
         <ToastProvider>
-            <StatusBar />
-            <Router />
+          <StatusBar />
+          <Router />
         </ToastProvider>
       </ContextProvider>
     </ThemeProvider>

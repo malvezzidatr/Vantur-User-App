@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { RegisterModel } from './models';
 import { createUser } from '../../services/User/requests';
 import { useNavigate } from 'react-router-native';
@@ -11,10 +11,23 @@ const useRegisterViewModel = (): RegisterModel => {
   const [lastName, setLastName] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [buttonIsDisabled, setButtonIsDisabled] = useState<boolean>(true);
+  const [psswdIconName, setPsswdIconName] = useState<'eye' | 'eye-slash'>('eye-slash');
+  const [repeatPsswdIconName, setRepeatPsswdIconName] = useState<'eye' | 'eye-slash'>('eye-slash');
+  const [showPsswd, setShowPsswd] = useState<boolean>(false);
+  const [showRepeatPsswd, setShowRepeatPsswd] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const { showToast } = useToast()
+  const { showToast } = useToast();
 
+  const changeIconPsswd = (
+    setValue: Dispatch<SetStateAction<'eye' | 'eye-slash'>>,
+    value: 'eye' | 'eye-slash',
+    setShowPassword: Dispatch<SetStateAction<boolean>>,
+    showPassword: boolean,
+  ) => {
+    setValue(value)
+    setShowPassword(!showPassword);
+  }
 
   const onSubmit = async () => {
     try {
@@ -26,10 +39,10 @@ const useRegisterViewModel = (): RegisterModel => {
         password,
       };
       await createUser(data);
-      showToast('Cadastrado com sucesso!', 'success')
-      navigate('/')
+      showToast('Cadastrado com sucesso!', 'success');
+      navigate('/');
     } catch (err: any) {
-      showToast('Erro ao cadastrar', 'error')
+      showToast('Erro ao cadastrar', 'error');
       console.error(err?.response?.data?.message);
     } finally {
       setIsLoading(false);
@@ -53,6 +66,15 @@ const useRegisterViewModel = (): RegisterModel => {
     onSubmit,
     isLoading,
     buttonIsDisabled,
+    psswdIconName,
+    setPsswdIconName,
+    repeatPsswdIconName,
+    setRepeatPsswdIconName,
+    changeIconPsswd,
+    showPsswd,
+    setShowPsswd,
+    showRepeatPsswd,
+    setShowRepeatPsswd,
   };
 };
 

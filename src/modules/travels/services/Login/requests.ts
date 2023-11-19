@@ -8,6 +8,6 @@ export const login = async (dataLogin: Login): Promise<any> => {
   const { access_token, userData } = response?.data;
   return {
     access_token,
-    userData
+    userData,
   };
 };

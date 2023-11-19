@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as S from './styles';
 import { TextInputProps, ViewStyle } from 'react-native';
+import Icon, { FontAwesome5IconProps } from 'react-native-vector-icons/FontAwesome5';
 
 interface InputProps extends TextInputProps {
   labelText: string;
@@ -11,6 +12,9 @@ interface InputProps extends TextInputProps {
   error?: boolean;
   errorMessage?: string;
   onBlur?: () => void;
+  containerStyle?: ViewStyle;
+  icon?: FontAwesome5IconProps;
+  iconFunction?: () => void;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -22,6 +26,9 @@ export const Input: React.FC<InputProps> = ({
   error,
   errorMessage,
   onBlur,
+  containerStyle,
+  icon,
+  iconFunction,
   ...props
 }): JSX.Element => {
   const [emptyError, setEmptyError] = useState<boolean>();
@@ -32,9 +39,10 @@ export const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <S.Container {...props}>
+    <S.Container style={containerStyle}>
       <S.Text>{labelText}</S.Text>
       <S.Input
+        {...props}
         style={[
           {
             shadowColor: '#000',
@@ -64,6 +72,18 @@ export const Input: React.FC<InputProps> = ({
       ) : (
         <S.ErrorText></S.ErrorText>
       )}
+      {
+        icon &&
+          <Icon
+            onPress={iconFunction}
+            style={{position: 'absolute', top: 40, right: 15}}
+            name={icon.name}
+            solid
+            size={18}
+            color={icon.color}
+            
+          />
+      }
     </S.Container>
   );
 };
