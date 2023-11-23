@@ -50,8 +50,6 @@ export const Input: React.FC<PasswordInputProps> = ({
     setEmptyError(shouldShowEmptyError);
     setFocus(false);
     if(!value) {
-      // bottom.value = -36
-      // labelFontsize.value = 16
       Animated.timing(transY.current, {
         toValue: 40,
         duration: 300,
@@ -68,8 +66,6 @@ export const Input: React.FC<PasswordInputProps> = ({
 
   const defaultOnFocus = () => {
     setFocus(true);
-    // bottom.value = withSpring(-26);
-    // labelFontsize.value = withSpring(10);
     Animated.timing(transY.current, {
       toValue: 28,
       duration: 300,
@@ -101,17 +97,16 @@ export const Input: React.FC<PasswordInputProps> = ({
         translateY: transY.current
       }]}]}
       >
-        <Animated.Text
+        <S.Text
+          focus={focus}
           onPress={handleTextClick}
           style={{
             fontSize: fontSize.current,
             height: 20,
-            fontWeight: 'bold',
-            zIndex: 10,
           }}
         >
           {labelText}
-        </Animated.Text>
+        </S.Text>
       </Animated.View>
       <S.Input
         ref={inputRef}
@@ -163,7 +158,7 @@ export const Input: React.FC<PasswordInputProps> = ({
           name={showPassword ? 'eye' : 'eye-slash'}
           solid
           size={18}
-          color="black"
+          color="#a2999e"
         />
       }
     </S.Container>

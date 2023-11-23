@@ -38,21 +38,18 @@ export const RegisterView: React.FC = (): JSX.Element => {
         value={lastName}
         setValue={setLastName}
         placeholder="Digite seu sobrenome"
-        containerStyle={{ marginTop: 8 }}
       />
       <Input
         labelText="E-mail"
         value={email}
         setValue={setEmail}
         placeholder="Digite seu e-mail"
-        containerStyle={{ marginTop: 8 }}
       />
       <Input
         labelText="Senha"
         value={password}
         setValue={setPassword}
         placeholder="Digite sua senha"
-        containerStyle={{ marginTop: 8 }}
         secureTextEntry={!showPsswd}
       />
       <Input
@@ -60,7 +57,6 @@ export const RegisterView: React.FC = (): JSX.Element => {
         value={repeatPassword}
         setValue={setRepeatPassword}
         placeholder="Digite sua senha novamente"
-        containerStyle={{ marginTop: 8 }}
         secureTextEntry={!showRepeatPsswd}
       />
       <Button

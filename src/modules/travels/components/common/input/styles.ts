@@ -1,3 +1,4 @@
+import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -7,8 +8,8 @@ export const Container = styled.View`
   margin-left: 4px;
 `;
 
-export const Text = styled.Text<{ error?: boolean, focus: boolean }>`
-  color: ${({ theme }) => theme.colors.primary};
+export const Text = styled(Animated.Text)<{focus?: boolean}>`
+  color: ${({ theme, focus }) => focus ? theme.colors.primary : '#bdbbb6'};
   font-weight: 700;
   align-self: flex-start;
   position: relative;
@@ -23,9 +24,9 @@ export const Input = styled.TextInput<{ error?: boolean, focus: boolean }>`
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
   border: ${(props) => props?.focus ?
-    `2px solid ${props?.theme.colors.primary}`
+    `1px solid ${props?.theme.colors.primary}`
     :
-    (props?.error ? `2px solid ${props?.theme.colors.error}` : '0px')};
+    (props?.error ? `1px solid ${props?.theme.colors.error}` : `1px solid #a2999e`)};
   position: relative;
 `;
 
