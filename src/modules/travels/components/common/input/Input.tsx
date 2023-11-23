@@ -1,9 +1,10 @@
 // PasswordInput.tsx
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as S from './styles'; // substitua pelo caminho correto
-import { TextInputProps, ViewStyle } from 'react-native';
-import Icon, { FontAwesome5IconProps } from 'react-native-vector-icons/FontAwesome5';
+import { TextInputProps, ViewStyle, Animated, Text, TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Easing, useAnimatedRef, useAnimatedStyle, useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 
 interface PasswordInputProps extends TextInputProps {
   labelText: string;
@@ -34,6 +35,11 @@ export const Input: React.FC<PasswordInputProps> = ({
   const [emptyError, setEmptyError] = useState<boolean>();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
+  
+  const inputRef = useRef<TextInput>(null);
+
+  const transY = useRef(new Animated.Value(38));
+  const fontSize = useRef(new Animated.Value(16));
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -43,16 +49,72 @@ export const Input: React.FC<PasswordInputProps> = ({
     const shouldShowEmptyError = !value;
     setEmptyError(shouldShowEmptyError);
     setFocus(false);
+    if(!value) {
+      // bottom.value = -36
+      // labelFontsize.value = 16
+      Animated.timing(transY.current, {
+        toValue: 40,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+  
+      Animated.timing(fontSize.current, {
+        toValue: 16,
+        duration: 300,
+        useNativeDriver: false,
+      }).start()
+    }
   };
 
   const defaultOnFocus = () => {
     setFocus(true);
+    // bottom.value = withSpring(-26);
+    // labelFontsize.value = withSpring(10);
+    Animated.timing(transY.current, {
+      toValue: 28,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+    
+    Animated.timing(fontSize.current, {
+      toValue: 12,
+      duration: 300,
+      useNativeDriver: false,
+    }).start()
   }
+
+  const handleTextClick = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
 
   return (
     <S.Container style={containerStyle}>
-      <S.Text>{labelText}</S.Text>
+      <Animated.View style={[{
+        position: 'relative',
+        left: 20,
+        bottom: 2,
+        zIndex: 10,
+        alignSelf: 'flex-start'
+      },{ transform: [{
+        translateY: transY.current
+      }]}]}
+      >
+        <Animated.Text
+          onPress={handleTextClick}
+          style={{
+            fontSize: fontSize.current,
+            height: 20,
+            fontWeight: 'bold',
+            zIndex: 10,
+          }}
+        >
+          {labelText}
+        </Animated.Text>
+      </Animated.View>
       <S.Input
+        ref={inputRef}
         focus={focus}
         {...props}
         style={[
@@ -68,7 +130,7 @@ export const Input: React.FC<PasswordInputProps> = ({
           },
           inputStyle,
         ]}
-        placeholder={placeholder}
+        placeholder={focus ? placeholder : ''}
         value={value}
         onChangeText={setValue}
         error={error || emptyError}
@@ -97,7 +159,7 @@ export const Input: React.FC<PasswordInputProps> = ({
         props?.secureTextEntry &&
         <Icon
           onPress={togglePasswordVisibility}
-          style={{ position: 'absolute', top: 40, right: 15 }}
+          style={{ position: 'absolute', top: 26, right: !showPassword ? 8 : 9.2, padding: 12, zIndex: 99 }}
           name={showPassword ? 'eye' : 'eye-slash'}
           solid
           size={18}
