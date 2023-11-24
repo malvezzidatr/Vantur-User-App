@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as S from './styles';
+import { ActivityIndicator, Animated, View } from 'react-native';
 
 export interface IToast {
   text: string;
@@ -8,6 +9,12 @@ export interface IToast {
 
 export const Toast: React.FC<IToast> = ({ text, statusEnum }): JSX.Element => {
   const [title, setTitle] = useState<string>('');
+  const [animationFinished, setAnimationFinished] = useState<boolean>(false);
+  const width = useRef(new Animated.Value(30));
+  const height = useRef(new Animated.Value(30));
+  const borderRadius = useRef(new Animated.Value(50));
+  const left = useRef(new Animated.Value(180));
+  const animationTime = 300;
 
   useEffect(() => {
     const titles = {
@@ -19,8 +26,34 @@ export const Toast: React.FC<IToast> = ({ text, statusEnum }): JSX.Element => {
     setTitle(titles[statusEnum]);
   }, []);
 
+  useEffect(() => {
+    Animated.timing(width.current, {
+      toValue: 350,
+      duration: animationTime,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(height.current, {
+      toValue: 90,
+      duration: animationTime,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(left.current, {
+      toValue: 20,
+      duration: animationTime,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(borderRadius.current, {
+      toValue: 12,
+      duration: animationTime,
+      useNativeDriver: false,
+    }).start();
+    setTimeout(() => {
+      setAnimationFinished(true);
+    }, animationTime);
+  }, []);
+
   return (
-    <S.ToastContainer
+    <S.NewToastContainer
       style={[
         {
           shadowColor: '#000',
@@ -33,12 +66,24 @@ export const Toast: React.FC<IToast> = ({ text, statusEnum }): JSX.Element => {
 
           elevation: 5,
         },
+        {
+          width: width.current,
+          height: height.current,
+          borderRadius: borderRadius.current,
+          left: left.current,
+        }
       ]}
     >
-      <S.ContentContainer status={statusEnum}>
-        <S.Title status={statusEnum}>{title}</S.Title>
-        <S.Text>{text}</S.Text>
-      </S.ContentContainer>
-    </S.ToastContainer>
+      
+      {
+        animationFinished ?
+          <S.ContentContainer status={statusEnum}>
+            <S.Title status={statusEnum}>{title}</S.Title>
+            <S.Text>{text}</S.Text>
+          </S.ContentContainer>
+          :
+          <S.Indicator status={statusEnum} size={'large'} />
+      }
+    </S.NewToastContainer>
   );
 };

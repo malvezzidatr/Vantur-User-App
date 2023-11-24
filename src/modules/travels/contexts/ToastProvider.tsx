@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect, useMemo, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import ToastContext from './useToast';
 import { Toast } from '../components/common/toast/Toast';
 
@@ -20,10 +20,9 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({
   ) => {
     setToast({ text, statusEnum });
 
-    // Esconde o toast após alguns segundos (por exemplo, 3 segundos)
     setTimeout(() => {
       setToast(null);
-    }, 3000);
+    }, 3500);
   };
 
   return (

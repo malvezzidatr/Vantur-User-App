@@ -1,16 +1,18 @@
+import { ActivityIndicatorProps, Animated } from 'react-native';
 import styled from 'styled-components/native';
 
-export const ToastContainer = styled.View`
-  width: 90%;
-  height: 90px;
+interface IndicatorProps extends ActivityIndicatorProps {
+  status: 'success' | 'warn' | 'error';
+}
+
+export const NewToastContainer = styled(Animated.View)`
   justify-content: center;
   padding-left: 12px;
-  border-radius: 12px;
-  margin: 80px 20px;
   background-color: ${({ theme }) => theme.colors.white};
   z-index: 99;
   position: absolute;
-`;
+  top: 70px;
+`
 
 export const ContentContainer = styled.View<{
   status: 'success' | 'warn' | 'error';
@@ -27,11 +29,15 @@ export const ContentContainer = styled.View<{
       warn: theme.colors.warn,
     };
 
-    const backgroundColor = statusColorMap[status];
+    const borderLeftColor = statusColorMap[status];
 
-    return backgroundColor;
+    return borderLeftColor;
   }};
 `;
+
+export const Indicator = styled.ActivityIndicator.attrs<IndicatorProps>((props) => ({
+  color: props.theme.colors[props.status],
+}))<IndicatorProps>``;
 
 export const Title = styled.Text<{ status: 'success' | 'warn' | 'error' }>`
   color: ${(props) => {
@@ -55,4 +61,5 @@ export const Title = styled.Text<{ status: 'success' | 'warn' | 'error' }>`
 export const Text = styled.Text`
   color: ${({ theme }) => theme.colors.primary};
   font-size: 14px;
+  font-weight: bold;
 `;
