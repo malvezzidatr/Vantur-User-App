@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import { Card } from '../../components/Home/card/card';
-import { FlatList, RefreshControl, Text, TouchableOpacity } from 'react-native';
+import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-native';
 import useHomeViewModel from './view.model';
 import { SearchBar } from '../../components/Home/searchBar/searchBar';
 import { CardSkeleton } from '../../components/Home/cardSkeleton/cardSkeleton';
@@ -38,10 +38,16 @@ export const HomeView: React.FC = (): JSX.Element => {
         />
       </S.SearchBarContainer>
       <S.EventTitle>Eventos</S.EventTitle>
-      {searchResult.length <= 0 &&
-        Array.from({ length: 4 }).map((_, index) => (
-          <CardSkeleton key={index} />
-        ))}
+      {searchResult.length <= 0 && search === '' && (
+        <View style={{marginTop: 10}}> 
+          {
+            Array.from({ length: 4 }).map((_, index) => (
+              <CardSkeleton key={index} />
+            ))
+          }
+        </View>
+      )
+      }
       <FlatList
         contentContainerStyle={{ paddingHorizontal: 30, paddingVertical: 10 }}
         refreshControl={
@@ -52,16 +58,14 @@ export const HomeView: React.FC = (): JSX.Element => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => {
           return (
-            <>
-              <Card
-                value={item?.value}
-                destination={item?.destination}
-                seats={item?.seats}
-                reserveds={item?.confirmeds?.length}
-                owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
-                departure={item?.departure_location}
-              />
-            </>
+            <Card
+              value={item?.value}
+              destination={item?.destination}
+              seats={item?.seats}
+              reserveds={item?.confirmeds?.length}
+              owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
+              departure={item?.departure_location}
+            />
           );
         }}
       />
