@@ -36,7 +36,19 @@ export const TravelCard: React.FC<ITravelCardProps> = ({
     }, [favorite]);
 
     return (
-        <S.Container>
+        <S.Container
+            style={{
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 4,
+                },
+                shadowOpacity: 0.30,
+                shadowRadius: 4.65,
+
+                elevation: 8,
+            }}
+        >
             <Image style={{position: 'absolute', width: '100%', height: '100%', borderRadius: 20}} source={{uri: 'https://www.melhoresdestinos.com.br/wp-content/uploads/2019/02/passagens-aereas-paris-capa2019-02.jpg'}}/>
             <S.DateContainer>
                 <S.Date>14</S.Date>

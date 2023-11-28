@@ -74,7 +74,7 @@ export const FavoriteButton = styled(BlurView).attrs({
 export const GoToDetailsButton = styled.TouchableOpacity`
     width: 100px;
     height: 70px;
-    background-color: green;
+    background-color: ${({ theme }) => theme.colors.primary};
     align-items: center;
     justify-content: center;
     border-radius: 8px;

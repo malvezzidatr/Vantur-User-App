@@ -3,12 +3,13 @@ import { login } from '../../services/Login/requests';
 import { useNavigate } from 'react-router-native';
 import { useStorageContext } from '../../contexts/useStorageContext';
 import { useToast } from '../../contexts/useToast';
+import { useNavigation } from '@react-navigation/native';
 
 const useLoginViewModel = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
+  const navigate = useNavigation();
 
   const { getStorageValue, setStorageValue } = useStorageContext();
 
@@ -16,7 +17,7 @@ const useLoginViewModel = () => {
     const checkIfIsAlreadyLoggedIn = async () => {
       const loggedIn = await getStorageValue('access_token');
       if (loggedIn) {
-        navigate('/home');
+        navigate.navigate('Register');
       }
     };
     checkIfIsAlreadyLoggedIn();
@@ -28,7 +29,7 @@ const useLoginViewModel = () => {
       const { access_token, userData } = await login({ email, password });
       setStorageValue('access_token', access_token);
       setStorageValue('userData', JSON.stringify(userData));
-      navigate('/home');
+      navigate.navigate('Home');
     } catch (error) {
       console.log(error);
     } finally {

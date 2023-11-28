@@ -39,7 +39,7 @@ export const LoginView: React.FC = (): JSX.Element => {
         <TextLink
           firstText="Não tem uma conta? "
           linkText="Registre-se agora."
-          toGo="/register"
+          toGo="Register"
         />
       </S.Container>
     </>

@@ -3,6 +3,7 @@ import { PsswdIconNames, RegisterModel } from './models';
 import { createUser } from '../../services/User/requests';
 import { useNavigate } from 'react-router-native';
 import { useToast } from '../../contexts/useToast';
+import { useNavigation } from '@react-navigation/native';
 
 const useRegisterViewModel = (): RegisterModel => {
   const [email, setEmail] = useState<string>('');
@@ -15,7 +16,7 @@ const useRegisterViewModel = (): RegisterModel => {
   const [showPsswd, setShowPsswd] = useState<boolean>(false);
   const [showRepeatPsswd, setShowRepeatPsswd] = useState<boolean>(false);
 
-  const navigate = useNavigate();
+  const navigate = useNavigation();
   const { showToast } = useToast();
 
   const onSubmit = async () => {
@@ -29,7 +30,7 @@ const useRegisterViewModel = (): RegisterModel => {
       };
       await createUser(data);
       showToast('Cadastrado com sucesso!', 'success');
-      navigate('/');
+      navigate.navigate('Login');
     } catch (err: any) {
       showToast('Erro ao cadastrar', 'error');
       console.error(err?.response?.data?.message);

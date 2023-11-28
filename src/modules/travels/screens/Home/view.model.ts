@@ -3,6 +3,7 @@ import { getAllTravels } from '../../services/Travel/requests';
 import { Travel } from '../../services/Travel/interfaces';
 import { useNavigate } from 'react-router-native';
 import { useStorageContext } from '../../contexts/useStorageContext';
+import { useNavigation } from '@react-navigation/native';
 
 export interface IUserData {
   first_name: string;
@@ -17,7 +18,7 @@ const useHomeViewModel = () => {
   const [userData, setUserData] = useState<IUserData>();
   const [searchResult, setSearchResult] = useState<Travel[]>([]);
 
-  const navigate = useNavigate();
+  const navigate = useNavigation();
   const { deleteStorageValue, getStorageValue } = useStorageContext();
 
   const getUserData = async () => {
@@ -29,7 +30,7 @@ const useHomeViewModel = () => {
     const { data, error } = await getAllTravels();
     if (error?.response?.status === 401) {
       deleteStorageValue('access_token');
-      navigate('/');
+      navigate.navigate('Login');
     } else {
       setTravels(data);
     }

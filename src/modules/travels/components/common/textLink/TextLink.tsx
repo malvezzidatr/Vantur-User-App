@@ -1,11 +1,11 @@
 import React from 'react';
 import * as S from './styles';
-import { useNavigate } from 'react-router-native';
+import { useNavigation } from '@react-navigation/native';
 
 interface TextLinkProps {
   firstText: string;
   linkText: string;
-  toGo: string;
+  toGo: 'Home' | 'Login' | 'Register';
 }
 
 export const TextLink: React.FC<TextLinkProps> = ({
@@ -13,11 +13,11 @@ export const TextLink: React.FC<TextLinkProps> = ({
   linkText,
   toGo,
 }): JSX.Element => {
-  const navigate = useNavigate();
+  const navigation = useNavigation();
   return (
     <S.LinkContainer>
       <S.LinkText>{firstText}</S.LinkText>
-      <S.LinkBold onPress={() => navigate(toGo)}>{linkText}</S.LinkBold>
+      <S.LinkBold onPress={() => navigation.navigate(toGo)}>{linkText}</S.LinkBold>
     </S.LinkContainer>
   );
 };
