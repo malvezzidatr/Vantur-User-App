@@ -2,9 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as S from './styles'; // substitua pelo caminho correto
-import { TextInputProps, ViewStyle, Animated, Text, TextInput } from 'react-native';
+import { TextInputProps, ViewStyle, Animated, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Easing, useAnimatedRef, useAnimatedStyle, useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 
 interface PasswordInputProps extends TextInputProps {
   labelText: string;

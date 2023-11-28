@@ -6,6 +6,7 @@ import useHomeViewModel from './view.model';
 import { SearchBar } from '../../components/Home/searchBar/searchBar';
 import { CardSkeleton } from '../../components/Home/cardSkeleton/cardSkeleton';
 import { useStorageContext } from '../../contexts/useStorageContext';
+import { TravelCard } from '../../components/Home/travelCard/travelCard';
 
 export const HomeView: React.FC = (): JSX.Element => {
   const {
@@ -38,7 +39,7 @@ export const HomeView: React.FC = (): JSX.Element => {
         />
       </S.SearchBarContainer>
       <S.EventTitle>Eventos</S.EventTitle>
-      {searchResult.length <= 0 && search === '' && (
+      {/* {searchResult.length <= 0 && search === '' && (
         <View style={{marginTop: 10}}> 
           {
             Array.from({ length: 4 }).map((_, index) => (
@@ -47,25 +48,38 @@ export const HomeView: React.FC = (): JSX.Element => {
           }
         </View>
       )
-      }
+      } */}
+      
       <FlatList
         contentContainerStyle={{ paddingHorizontal: 30, paddingVertical: 10 }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         data={searchResult}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => {
+        horizontal
+        renderItem={({ item, index }) => {
           return (
-            <Card
-              value={item?.value}
-              destination={item?.destination}
-              seats={item?.seats}
-              reserveds={item?.confirmeds?.length}
-              owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
-              departure={item?.departure_location}
-            />
+            <S.CardsContainer>
+              <TravelCard
+                value={item?.value}
+                destination={item?.destination}
+                seats={item?.seats}
+                reserveds={item?.confirmeds?.length}
+                owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
+                departure={item?.departure_location}
+                isFavorite={index % 2 === 0 && true}
+              />
+            </S.CardsContainer>
+            // <Card
+            //   value={item?.value}
+            //   destination={item?.destination}
+            //   seats={item?.seats}
+            //   reserveds={item?.confirmeds?.length}
+            //   owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
+            //   departure={item?.departure_location}
+            // />
           );
         }}
       />

@@ -24,3 +24,8 @@ export const EventTitle = styled.Text`
   padding: 0 30px;
   margin-bottom: 12px;
 `;
+
+export const CardsContainer = styled.View`
+  flex-direction: row;
+  margin-right: 30px;
+`
