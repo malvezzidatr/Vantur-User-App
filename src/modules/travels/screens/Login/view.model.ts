@@ -17,7 +17,7 @@ const useLoginViewModel = () => {
     const checkIfIsAlreadyLoggedIn = async () => {
       const loggedIn = await getStorageValue('access_token');
       if (loggedIn) {
-        navigate.navigate('Register');
+        navigate.navigate('Home');
       }
     };
     checkIfIsAlreadyLoggedIn();
