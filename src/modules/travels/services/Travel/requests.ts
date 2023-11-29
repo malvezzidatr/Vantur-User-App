@@ -16,3 +16,16 @@ export const getAllTravels = async (): Promise<{
     return { data: [], error };
   }
 };
+
+export const getOneTravel = async (id: string): Promise<{
+  data?: Travel;
+  error: any;
+}> => {
+  try {
+    const response = await get(`/travel/${id}`, {}, '');
+    const travel: Travel = response.data;
+    return { data: travel, error: null }
+  } catch (error) {
+    return { data: undefined, error }
+  }
+}

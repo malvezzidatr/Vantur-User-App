@@ -32,7 +32,7 @@ export const Date = styled.Text`
 
 export const Title = styled.Text`
     color: ${({ theme }) => theme.colors.white};
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 30px;
     font-style: italic;

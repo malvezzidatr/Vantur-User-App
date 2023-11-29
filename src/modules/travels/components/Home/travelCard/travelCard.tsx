@@ -13,6 +13,8 @@ export interface ITravelCardProps {
     owner: string;
     departure: string;
     isFavorite: boolean;
+    goToDetails: () => void;
+    image: Uint8Array[];
   }
 
 export const TravelCard: React.FC<ITravelCardProps> = ({
@@ -22,10 +24,17 @@ export const TravelCard: React.FC<ITravelCardProps> = ({
   reserveds = 0,
   owner,
   departure,
-  isFavorite
+  isFavorite,
+  goToDetails,
+  image
 }): JSX.Element => {
     const [favorite, setFavorite] = useState<boolean>(isFavorite);
     const animation = useRef(null);
+
+    useEffect(() => {
+
+    }, []);
+
 
     useEffect(() => {
         if (!favorite) {
@@ -49,7 +58,7 @@ export const TravelCard: React.FC<ITravelCardProps> = ({
                 elevation: 8,
             }}
         >
-            <Image style={{position: 'absolute', width: '100%', height: '100%', borderRadius: 20}} source={{uri: 'https://www.melhoresdestinos.com.br/wp-content/uploads/2019/02/passagens-aereas-paris-capa2019-02.jpg'}}/>
+            <Image style={{position: 'absolute', width: '100%', height: '100%', borderRadius: 20}} source={{uri: `data:image/png;base64,${image}`}}/>
             <S.DateContainer>
                 <S.Date>14</S.Date>
             </S.DateContainer>
@@ -83,7 +92,11 @@ export const TravelCard: React.FC<ITravelCardProps> = ({
                         />
                     </S.FavoriteButton>
                 </TouchableOpacity>
-                <S.GoToDetailsButton><Icon name="chevron-right" color='white' size={15} /></S.GoToDetailsButton>
+                <S.GoToDetailsButton
+                    onPress={() => goToDetails()}
+                >
+                    <Icon name="chevron-right" color='white' size={15}/>
+                </S.GoToDetailsButton>
             </S.ButtonContainer>
         </S.Container>
     )

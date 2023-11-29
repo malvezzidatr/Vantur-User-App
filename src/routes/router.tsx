@@ -9,6 +9,7 @@ import { LoginView } from '../modules/travels/screens/Login/view';
 import { HomeView } from '../modules/travels/screens/Home/view';
 import { MyTravelsView } from '../modules/travels/screens/MyTravels/view';
 import { ProfileView } from '../modules/travels/screens/Profile/view';
+import { TravelDetailsView } from '../modules/travels/screens/TravelDetails/view';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useTheme } from 'styled-components';
@@ -31,6 +32,7 @@ export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
   Register: undefined;
+  TravelDetails: { id: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -139,6 +141,7 @@ const Home = () => {
         {TabArr.map((item, index) => {
           return (
             <Tab.Screen
+              key={index}
               name={item.route}
               component={item.component}
               options={{
@@ -162,6 +165,7 @@ const Router = () => {
         <Stack.Screen name='Login' component={LoginView} />
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='Register' component={RegisterView} />
+        <Stack.Screen name='TravelDetails' component={TravelDetailsView} />
       </Stack.Navigator>
     </NavigationContainer>
   );

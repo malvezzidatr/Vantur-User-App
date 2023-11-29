@@ -47,6 +47,10 @@ const useHomeViewModel = () => {
     }
   }, []);
 
+  const goToDetails = (id: string) => {
+    navigate.navigate('TravelDetails', { id });
+  }
+
   useEffect(() => {
     getTravels();
     getUserData();
@@ -57,7 +61,6 @@ const useHomeViewModel = () => {
       (travel) =>
         travel?.destination?.toLowerCase()?.includes(search?.toLowerCase()),
     );
-
     setSearchResult(filteredTravels);
   }, [search, travels]);
 
@@ -69,6 +72,7 @@ const useHomeViewModel = () => {
     setSearch,
     userData,
     searchResult,
+    goToDetails
   };
 };
 

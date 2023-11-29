@@ -7,6 +7,7 @@ import { SearchBar } from '../../components/Home/searchBar/searchBar';
 import { CardSkeleton } from '../../components/Home/cardSkeleton/cardSkeleton';
 import { useStorageContext } from '../../contexts/useStorageContext';
 import { TravelCard } from '../../components/Home/travelCard/travelCard';
+import { useNavigation } from '@react-navigation/native';
 
 export const HomeView: React.FC = (): JSX.Element => {
   const {
@@ -17,10 +18,10 @@ export const HomeView: React.FC = (): JSX.Element => {
     setSearch,
     userData,
     searchResult,
+    goToDetails
   } = useHomeViewModel();
 
   const { deleteStorageValue } = useStorageContext();
-
   return (
     <S.Container>
       <TouchableOpacity onPress={() => deleteStorageValue('access_token')}>
@@ -38,18 +39,7 @@ export const HomeView: React.FC = (): JSX.Element => {
           inputStyle={{ marginBottom: 30 }}
         />
       </S.SearchBarContainer>
-      <S.EventTitle>Eventos</S.EventTitle>
-      {/* {searchResult.length <= 0 && search === '' && (
-        <View style={{marginTop: 10}}> 
-          {
-            Array.from({ length: 4 }).map((_, index) => (
-              <CardSkeleton key={index} />
-            ))
-          }
-        </View>
-      )
-      } */}
-      
+      <S.EventTitle>Eventos</S.EventTitle>      
       <FlatList
         contentContainerStyle={{ paddingHorizontal: 30, paddingVertical: 10 }}
         refreshControl={
@@ -70,16 +60,10 @@ export const HomeView: React.FC = (): JSX.Element => {
                 owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
                 departure={item?.departure_location}
                 isFavorite={index % 2 === 0 && true}
+                goToDetails={() => goToDetails(item?.id)}
+                image={item.file}
               />
             </S.CardsContainer>
-            // <Card
-            //   value={item?.value}
-            //   destination={item?.destination}
-            //   seats={item?.seats}
-            //   reserveds={item?.confirmeds?.length}
-            //   owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
-            //   departure={item?.departure_location}
-            // />
           );
         }}
       />

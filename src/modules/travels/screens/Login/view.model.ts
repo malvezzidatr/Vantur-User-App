@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-native';
 import { useStorageContext } from '../../contexts/useStorageContext';
 import { useToast } from '../../contexts/useToast';
 import { useNavigation } from '@react-navigation/native';
+import { BackHandler } from 'react-native';
 
 const useLoginViewModel = () => {
   const [email, setEmail] = useState<string>('');
