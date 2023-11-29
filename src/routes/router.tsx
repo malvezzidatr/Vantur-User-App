@@ -14,6 +14,19 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useTheme } from 'styled-components';
 import { Animated, TouchableOpacity, View } from 'react-native';
 
+export type Tabs = {
+  route: string;
+  label: string;
+  iconName: string;
+  component: React.FC;
+}
+
+export type TabButtonType = {
+  item: Tabs;
+  onPress?: () => void;
+  accessibilityState: { selected: boolean }
+}
+
 export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
@@ -23,24 +36,42 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
 
-const TabArr = [
+const TabArr: Tabs[] = [
   { route: 'Home', label: 'Home', iconName: 'map', component: HomeView},
   { route: 'MyTravels', label: 'Meus Rolês', iconName: 'calendar', component: MyTravelsView},
   { route: 'Profile', label: 'Perfil', iconName: 'user', component: ProfileView},
 ]
 
-const TabButton = ({ item, onPress, accessibilityState }): JSX.Element => {
+const TabButton = ({
+  item,
+  onPress,
+  accessibilityState
+}: TabButtonType) => {
   const focused = accessibilityState.selected
-  const scale = useRef(new Animated.Value(1))
+  const transY = useRef(new Animated.Value(0));
+  const scale = useRef(new Animated.Value(1));
 
   useEffect(() => {
     if(focused) {
-      Animated.timing(scale.current, {
-        toValue: 1.8,
+      Animated.timing(transY.current, {
+        toValue: -25,
         duration: 250,
         useNativeDriver: true,
       }).start();
+
+      Animated.timing(scale.current, {
+        toValue: 1.6,
+        duration: 250,
+        useNativeDriver: true,
+      }).start();
+
     } else {
+      Animated.timing(transY.current, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start();
+
       Animated.timing(scale.current, {
         toValue: 1,
         duration: 250,
@@ -55,15 +86,27 @@ const TabButton = ({ item, onPress, accessibilityState }): JSX.Element => {
       style={{
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
     >
       <Animated.View
         style={{
-          transform: [{ scale: scale.current}]
+          transform: [{ 
+            translateY: transY.current,
+          }, {
+            scale: scale.current
+          }],
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 50,
+          height: 60,
+          width: 60,
+          borderColor: 'white',
+          backgroundColor: focused ? '#3A3A50' : 'white',
+          borderWidth: 5,
         }}
       >
-        <Icon name={item.iconName} solid={focused} size={15}/>
+        <Icon color={focused ? 'white' : undefined} name={item.iconName} solid={focused} size={15}/>
       </Animated.View>
     </TouchableOpacity>
   )
@@ -84,6 +127,7 @@ const Home = () => {
           right: 20,
           borderRadius: 15,
           height: 80,
+          backgroundColor: 'white'
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -99,7 +143,7 @@ const Home = () => {
               component={item.component}
               options={{
                 tabBarShowLabel: false,
-                tabBarIcon: ({ color, focused }) => (
+                tabBarIcon: ({ focused }) => (
                   <Icon name={item.iconName} solid={focused} />
                 ),
                 tabBarButton: (props) => <TabButton {...props} item={item} />
@@ -107,36 +151,6 @@ const Home = () => {
             />
           )
         })}
-      {/* <Tab.Screen
-        name='Home'
-        component={HomeView}
-        options={{
-          tabBarIcon: ({ size, color }) => (
-            <Icon name='map' size={22} color={color} />
-          ),
-          tabBarLabel: 'Home'
-        }}
-      />
-      <Tab.Screen
-        name='MyTravels'
-        component={MyTravelsView}
-        options={{
-          tabBarIcon: ({ size, color}) => (
-            <Icon name='calendar' size={22} color={color} />
-          ),
-          tabBarLabel: 'Meus Rolês',
-        }}
-      />
-      <Tab.Screen
-        name='Profile'
-        component={ProfileView}
-        options={{
-          tabBarIcon: ({ size, color }) => (
-            <Icon name='user' size={22} color={color} />
-          ),
-          tabBarLabel: 'Perfil'
-        }}
-      /> */}
     </Tab.Navigator>
   )
 }

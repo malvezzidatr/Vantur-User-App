@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex: 1;
   padding: 40px 0 0;
-  background-color: white;
+  background-color: #f6f6f6;
 `;
 
 export const HelloGuy = styled.Text`
