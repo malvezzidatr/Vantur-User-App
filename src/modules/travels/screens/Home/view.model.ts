@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getAllTravels } from '../../services/Travel/requests';
 import { Travel } from '../../services/Travel/interfaces';
-import { useNavigate } from 'react-router-native';
 import { useStorageContext } from '../../contexts/useStorageContext';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 export interface IUserData {
   first_name: string;
@@ -17,6 +16,7 @@ const useHomeViewModel = () => {
   const [search, setSearch] = useState<string>('');
   const [userData, setUserData] = useState<IUserData>();
   const [searchResult, setSearchResult] = useState<Travel[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigation();
   const { deleteStorageValue, getStorageValue } = useStorageContext();
@@ -56,6 +56,15 @@ const useHomeViewModel = () => {
     getUserData();
   }, []);
 
+  useFocusEffect((
+    useCallback(() => {
+      setLoading(true)
+      setTimeout(() => {
+        setLoading(false)
+      }, 200)
+    }, [])
+  ))
+
   useEffect(() => {
     const filteredTravels = travels?.filter(
       (travel) =>
@@ -72,7 +81,8 @@ const useHomeViewModel = () => {
     setSearch,
     userData,
     searchResult,
-    goToDetails
+    goToDetails,
+    loading
   };
 };
 

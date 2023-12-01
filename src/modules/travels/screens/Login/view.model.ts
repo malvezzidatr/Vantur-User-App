@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { login } from '../../services/Login/requests';
-import { useNavigate } from 'react-router-native';
 import { useStorageContext } from '../../contexts/useStorageContext';
 import { useToast } from '../../contexts/useToast';
 import { useNavigation } from '@react-navigation/native';

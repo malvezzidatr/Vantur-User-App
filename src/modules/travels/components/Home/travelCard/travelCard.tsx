@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as S from './styles';
-import { Animated, Image, Text, TouchableOpacity } from "react-native";
+import { Animated, Image, Text, TouchableOpacity, View } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import LottieView from 'lottie-react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export interface ITravelCardProps {
     value: string;
@@ -14,10 +15,10 @@ export interface ITravelCardProps {
     departure: string;
     isFavorite: boolean;
     goToDetails: () => void;
-    image: Uint8Array[];
+    image: string;
   }
 
-export const TravelCard: React.FC<ITravelCardProps> = ({
+const TravelCard: React.FC<ITravelCardProps> = ({
   value,
   destination,
   seats,
@@ -30,11 +31,6 @@ export const TravelCard: React.FC<ITravelCardProps> = ({
 }): JSX.Element => {
     const [favorite, setFavorite] = useState<boolean>(isFavorite);
     const animation = useRef(null);
-
-    useEffect(() => {
-
-    }, []);
-
 
     useEffect(() => {
         if (!favorite) {
@@ -58,12 +54,12 @@ export const TravelCard: React.FC<ITravelCardProps> = ({
                 elevation: 8,
             }}
         >
-            <Image style={{position: 'absolute', width: '100%', height: '100%', borderRadius: 20}} source={{uri: `data:image/png;base64,${image}`}}/>
+            <Image style={{position: 'absolute', width: '100%', height: '100%', borderRadius: 20}} source={{uri: image}}/>
             <S.DateContainer>
                 <S.Date>14</S.Date>
             </S.DateContainer>
-            <BlurView
-                intensity={60} 
+
+            <View
                 style={{
                     width: 210,
                     height: 150,
@@ -71,14 +67,16 @@ export const TravelCard: React.FC<ITravelCardProps> = ({
                     overflow: 'hidden',
                     marginTop: 70,
                     paddingTop: 25,
-                    paddingLeft: 30
-                }}>
+                    paddingLeft: 30,
+                    backgroundColor: '#3A3A50'
+                }}
+            >
                 <S.Title>{destination}</S.Title>
                 <S.OwnerContainer>
                     <S.OwnerTitle>Organizador:</S.OwnerTitle>
                     <S.Owner>{owner}</S.Owner>
                 </S.OwnerContainer>
-            </BlurView>
+            </View>
             <S.ButtonContainer>
                 <TouchableOpacity onPress={() => setFavorite(!favorite)}>
                     <S.FavoriteButton>
@@ -101,3 +99,7 @@ export const TravelCard: React.FC<ITravelCardProps> = ({
         </S.Container>
     )
 }
+
+const MemoizedTravelCard = React.memo(TravelCard);
+
+export { MemoizedTravelCard as TravelCard }

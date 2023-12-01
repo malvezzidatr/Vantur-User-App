@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { NativeRouter, Route, Routes } from 'react-router-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 /* Screens */
 import { RegisterView } from '../modules/travels/screens/Register/view';
@@ -10,7 +10,6 @@ import { HomeView } from '../modules/travels/screens/Home/view';
 import { MyTravelsView } from '../modules/travels/screens/MyTravels/view';
 import { ProfileView } from '../modules/travels/screens/Profile/view';
 import { TravelDetailsView } from '../modules/travels/screens/TravelDetails/view';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useTheme } from 'styled-components';
 import { Animated, TouchableOpacity, View } from 'react-native';
@@ -33,13 +32,14 @@ export type RootStackParamList = {
   Home: undefined;
   Register: undefined;
   TravelDetails: { id: string };
+  Profile: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
 
 const TabArr: Tabs[] = [
-  { route: 'Home', label: 'Home', iconName: 'map', component: HomeView},
+  { route: 'HomeTab', label: 'Home', iconName: 'map', component: HomeView},
   { route: 'MyTravels', label: 'Meus Rolês', iconName: 'calendar', component: MyTravelsView},
   { route: 'Profile', label: 'Perfil', iconName: 'user', component: ProfileView},
 ]
@@ -141,7 +141,7 @@ const Home = () => {
         {TabArr.map((item, index) => {
           return (
             <Tab.Screen
-              key={index}
+              key={item.route}
               name={item.route}
               component={item.component}
               options={{
@@ -161,11 +161,16 @@ const Home = () => {
 const Router = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
-        <Stack.Screen name='Login' component={LoginView} />
-        <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='Register' component={RegisterView} />
-        <Stack.Screen name='TravelDetails' component={TravelDetailsView} />
+      <Stack.Navigator>
+        <Stack.Group screenOptions={{headerShown: false}} >
+          <Stack.Screen name='Login' component={LoginView} />
+          <Stack.Screen name='Home' component={Home} />
+          <Stack.Screen name='Register' component={RegisterView} />
+          <Stack.Screen name='Profile' component={ProfileView} />
+        </Stack.Group>
+        <Stack.Group>
+          <Stack.Screen name='TravelDetails' component={TravelDetailsView} />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );

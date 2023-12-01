@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import { BlurView } from "expo-blur";
+import { View } from "moti";
 
 export const Container = styled.View`
     width: 260px;
@@ -36,6 +37,7 @@ export const Title = styled.Text`
     font-weight: bold;
     margin-bottom: 30px;
     font-style: italic;
+    text-shadow: ${({ theme }) => theme.colors.white} .5px .5px 4px;
 `
 
 export const OwnerContainer = styled.View``
@@ -43,6 +45,7 @@ export const OwnerContainer = styled.View``
 export const OwnerTitle = styled.Text`
     color: ${({ theme }) => theme.colors.white};
     font-size: 12px;
+    text-shadow: ${({ theme }) => theme.colors.white} .5px .5px 4px;
 `
 
 export const Owner = styled.Text`
@@ -50,6 +53,7 @@ export const Owner = styled.Text`
     font-size: 16px;
     font-weight: bold;
     font-style: italic;
+    text-shadow: ${({ theme }) => theme.colors.white} .5px .5px 4px;
 `
 
 export const ButtonContainer = styled.View`
@@ -60,15 +64,14 @@ export const ButtonContainer = styled.View`
     margin-top: 10px;
 `
 
-export const FavoriteButton = styled(BlurView).attrs({
-    intensity: 60
-})`
+export const FavoriteButton = styled.View`
     width: 70px;
     height: 70px;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
     overflow: hidden;
+    background-color: ${({ theme }) => theme.colors.primary};
 `
 
 export const GoToDetailsButton = styled.TouchableOpacity`

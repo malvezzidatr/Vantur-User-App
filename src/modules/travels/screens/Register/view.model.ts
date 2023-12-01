@@ -1,7 +1,6 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { PsswdIconNames, RegisterModel } from './models';
 import { createUser } from '../../services/User/requests';
-import { useNavigate } from 'react-router-native';
 import { useToast } from '../../contexts/useToast';
 import { useNavigation } from '@react-navigation/native';
 
