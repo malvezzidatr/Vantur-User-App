@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
   padding: 40px 0 0;
   background-color: #f6f6f6;
@@ -29,4 +29,4 @@ export const EventTitle = styled.Text`
 export const CardsContainer = styled.View`
   flex-direction: row;
   margin-right: 30px;
-`
+`;

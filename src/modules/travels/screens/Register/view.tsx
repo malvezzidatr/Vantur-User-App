@@ -21,7 +21,7 @@ export const RegisterView: React.FC = (): JSX.Element => {
     showPsswd,
     showRepeatPsswd,
     repeatPassword,
-    setRepeatPassword
+    setRepeatPassword,
   } = useRegisterViewModel();
 
   return (

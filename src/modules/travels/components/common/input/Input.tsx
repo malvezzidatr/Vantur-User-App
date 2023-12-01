@@ -34,7 +34,7 @@ export const Input: React.FC<PasswordInputProps> = ({
   const [emptyError, setEmptyError] = useState<boolean>();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
-  
+
   const inputRef = useRef<TextInput>(null);
 
   const transY = useRef(new Animated.Value(38));
@@ -48,18 +48,18 @@ export const Input: React.FC<PasswordInputProps> = ({
     const shouldShowEmptyError = !value;
     setEmptyError(shouldShowEmptyError);
     setFocus(false);
-    if(!value) {
+    if (!value) {
       Animated.timing(transY.current, {
         toValue: 40,
         duration: 300,
         useNativeDriver: true,
       }).start();
-  
+
       Animated.timing(fontSize.current, {
         toValue: 16,
         duration: 300,
         useNativeDriver: false,
-      }).start()
+      }).start();
     }
   };
 
@@ -70,13 +70,13 @@ export const Input: React.FC<PasswordInputProps> = ({
       duration: 300,
       useNativeDriver: true,
     }).start();
-    
+
     Animated.timing(fontSize.current, {
       toValue: 12,
       duration: 300,
       useNativeDriver: false,
-    }).start()
-  }
+    }).start();
+  };
 
   const handleTextClick = () => {
     if (inputRef.current) {
@@ -86,15 +86,23 @@ export const Input: React.FC<PasswordInputProps> = ({
 
   return (
     <S.Container style={containerStyle}>
-      <Animated.View style={[{
-        position: 'relative',
-        left: 20,
-        bottom: 2,
-        zIndex: 10,
-        alignSelf: 'flex-start'
-      },{ transform: [{
-        translateY: transY.current
-      }]}]}
+      <Animated.View
+        style={[
+          {
+            position: 'relative',
+            left: 20,
+            bottom: 2,
+            zIndex: 10,
+            alignSelf: 'flex-start',
+          },
+          {
+            transform: [
+              {
+                translateY: transY.current,
+              },
+            ],
+          },
+        ]}
       >
         <S.Text
           focus={focus}
@@ -139,27 +147,28 @@ export const Input: React.FC<PasswordInputProps> = ({
       )}
       {emptyError ? (
         <S.ErrorText>Este campo não pode ficar vazio</S.ErrorText>
-      ) :
+      ) : (
         <S.ErrorText></S.ErrorText>
-      }
-      {
-        helperText && !error && !emptyError && (
-          <S.HelperText>
-            {helperText}
-          </S.HelperText>
-        )
-      }
-      {
-        props?.secureTextEntry &&
+      )}
+      {helperText && !error && !emptyError && (
+        <S.HelperText>{helperText}</S.HelperText>
+      )}
+      {props?.secureTextEntry && (
         <Icon
           onPress={togglePasswordVisibility}
-          style={{ position: 'absolute', top: 26, right: !showPassword ? 8 : 9.2, padding: 12, zIndex: 99 }}
+          style={{
+            position: 'absolute',
+            top: 26,
+            right: !showPassword ? 8 : 9.2,
+            padding: 12,
+            zIndex: 99,
+          }}
           name={showPassword ? 'eye' : 'eye-slash'}
           solid
           size={18}
           color="#a2999e"
         />
-      }
+      )}
     </S.Container>
   );
 };

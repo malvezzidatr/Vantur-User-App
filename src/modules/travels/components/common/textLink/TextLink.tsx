@@ -17,7 +17,9 @@ export const TextLink: React.FC<TextLinkProps> = ({
   return (
     <S.LinkContainer>
       <S.LinkText>{firstText}</S.LinkText>
-      <S.LinkBold onPress={() => navigation.navigate(toGo)}>{linkText}</S.LinkBold>
+      <S.LinkBold onPress={() => navigation.navigate(toGo)}>
+        {linkText}
+      </S.LinkBold>
     </S.LinkContainer>
   );
 };

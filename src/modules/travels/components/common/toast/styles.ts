@@ -12,7 +12,7 @@ export const NewToastContainer = styled(Animated.View)`
   z-index: 99;
   position: absolute;
   top: 70px;
-`
+`;
 
 export const ContentContainer = styled.View<{
   status: 'success' | 'warn' | 'error';
@@ -35,9 +35,11 @@ export const ContentContainer = styled.View<{
   }};
 `;
 
-export const Indicator = styled.ActivityIndicator.attrs<IndicatorProps>((props) => ({
-  color: props.theme.colors[props.status],
-}))<IndicatorProps>``;
+export const Indicator = styled.ActivityIndicator.attrs<IndicatorProps>(
+  (props) => ({
+    color: props.theme.colors[props.status],
+  }),
+)<IndicatorProps>``;
 
 export const Title = styled.Text<{ status: 'success' | 'warn' | 'error' }>`
   color: ${(props) => {

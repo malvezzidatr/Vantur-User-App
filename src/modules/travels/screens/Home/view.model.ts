@@ -49,21 +49,21 @@ const useHomeViewModel = () => {
 
   const goToDetails = (id: string) => {
     navigate.navigate('TravelDetails', { id });
-  }
+  };
 
   useEffect(() => {
     getTravels();
     getUserData();
   }, []);
 
-  useFocusEffect((
+  useFocusEffect(
     useCallback(() => {
-      setLoading(true)
+      setLoading(true);
       setTimeout(() => {
-        setLoading(false)
-      }, 200)
-    }, [])
-  ))
+        setLoading(false);
+      }, 200);
+    }, []),
+  );
 
   useEffect(() => {
     const filteredTravels = travels?.filter(
@@ -82,7 +82,7 @@ const useHomeViewModel = () => {
     userData,
     searchResult,
     goToDetails,
-    loading
+    loading,
   };
 };
 

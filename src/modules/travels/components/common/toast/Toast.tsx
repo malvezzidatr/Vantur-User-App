@@ -71,19 +71,17 @@ export const Toast: React.FC<IToast> = ({ text, statusEnum }): JSX.Element => {
           height: height.current,
           borderRadius: borderRadius.current,
           left: left.current,
-        }
+        },
       ]}
     >
-      
-      {
-        animationFinished ?
-          <S.ContentContainer status={statusEnum}>
-            <S.Title status={statusEnum}>{title}</S.Title>
-            <S.Text>{text}</S.Text>
-          </S.ContentContainer>
-          :
-          <S.Indicator status={statusEnum} size={'large'} />
-      }
+      {animationFinished ? (
+        <S.ContentContainer status={statusEnum}>
+          <S.Title status={statusEnum}>{title}</S.Title>
+          <S.Text>{text}</S.Text>
+        </S.ContentContainer>
+      ) : (
+        <S.Indicator status={statusEnum} size={'large'} />
+      )}
     </S.NewToastContainer>
   );
 };

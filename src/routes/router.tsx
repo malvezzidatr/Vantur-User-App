@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  NativeStackScreenProps,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 /* Screens */
@@ -19,13 +22,13 @@ export type Tabs = {
   label: string;
   iconName: string;
   component: React.FC;
-}
+};
 
 export type TabButtonType = {
   item: Tabs;
   onPress?: () => void;
-  accessibilityState: { selected: boolean }
-}
+  accessibilityState: { selected: boolean };
+};
 
 export type RootStackParamList = {
   Login: undefined;
@@ -39,22 +42,28 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
 
 const TabArr: Tabs[] = [
-  { route: 'HomeTab', label: 'Home', iconName: 'map', component: HomeView},
-  { route: 'MyTravels', label: 'Meus Rolês', iconName: 'calendar', component: MyTravelsView},
-  { route: 'Profile', label: 'Perfil', iconName: 'user', component: ProfileView},
-]
+  { route: 'HomeTab', label: 'Home', iconName: 'map', component: HomeView },
+  {
+    route: 'MyTravels',
+    label: 'Meus Rolês',
+    iconName: 'calendar',
+    component: MyTravelsView,
+  },
+  {
+    route: 'Profile',
+    label: 'Perfil',
+    iconName: 'user',
+    component: ProfileView,
+  },
+];
 
-const TabButton = ({
-  item,
-  onPress,
-  accessibilityState
-}: TabButtonType) => {
-  const focused = accessibilityState.selected
+const TabButton = ({ item, onPress, accessibilityState }: TabButtonType) => {
+  const focused = accessibilityState.selected;
   const transY = useRef(new Animated.Value(0));
   const scale = useRef(new Animated.Value(1));
 
   useEffect(() => {
-    if(focused) {
+    if (focused) {
       Animated.timing(transY.current, {
         toValue: -25,
         duration: 250,
@@ -66,7 +75,6 @@ const TabButton = ({
         duration: 250,
         useNativeDriver: true,
       }).start();
-
     } else {
       Animated.timing(transY.current, {
         toValue: 0,
@@ -93,11 +101,14 @@ const TabButton = ({
     >
       <Animated.View
         style={{
-          transform: [{ 
-            translateY: transY.current,
-          }, {
-            scale: scale.current
-          }],
+          transform: [
+            {
+              translateY: transY.current,
+            },
+            {
+              scale: scale.current,
+            },
+          ],
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: 50,
@@ -108,11 +119,16 @@ const TabButton = ({
           borderWidth: 5,
         }}
       >
-        <Icon color={focused ? 'white' : undefined} name={item.iconName} solid={focused} size={15}/>
+        <Icon
+          color={focused ? 'white' : undefined}
+          name={item.iconName}
+          solid={focused}
+          size={15}
+        />
       </Animated.View>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const Home = () => {
   const { colors } = useTheme();
@@ -129,47 +145,48 @@ const Home = () => {
           right: 20,
           borderRadius: 15,
           height: 80,
-          backgroundColor: 'white'
+          backgroundColor: 'white',
         },
         tabBarLabelStyle: {
           fontSize: 12,
           marginTop: -10,
-          marginBottom: 10
+          marginBottom: 10,
         },
         tabBarShowLabel: false,
-      }}>
-        {TabArr.map((item, index) => {
-          return (
-            <Tab.Screen
-              key={item.route}
-              name={item.route}
-              component={item.component}
-              options={{
-                tabBarShowLabel: false,
-                tabBarIcon: ({ focused }) => (
-                  <Icon name={item.iconName} solid={focused} />
-                ),
-                tabBarButton: (props) => <TabButton {...props} item={item} />
-              }}
-            />
-          )
-        })}
+      }}
+    >
+      {TabArr.map((item, index) => {
+        return (
+          <Tab.Screen
+            key={item.route}
+            name={item.route}
+            component={item.component}
+            options={{
+              tabBarShowLabel: false,
+              tabBarIcon: ({ focused }) => (
+                <Icon name={item.iconName} solid={focused} />
+              ),
+              tabBarButton: (props) => <TabButton {...props} item={item} />,
+            }}
+          />
+        );
+      })}
     </Tab.Navigator>
-  )
-}
+  );
+};
 
 const Router = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Group screenOptions={{headerShown: false}} >
-          <Stack.Screen name='Login' component={LoginView} />
-          <Stack.Screen name='Home' component={Home} />
-          <Stack.Screen name='Register' component={RegisterView} />
-          <Stack.Screen name='Profile' component={ProfileView} />
+        <Stack.Group screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Login" component={LoginView} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Register" component={RegisterView} />
+          <Stack.Screen name="Profile" component={ProfileView} />
         </Stack.Group>
         <Stack.Group>
-          <Stack.Screen name='TravelDetails' component={TravelDetailsView} />
+          <Stack.Screen name="TravelDetails" component={TravelDetailsView} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

@@ -31,7 +31,7 @@ export const LoginView: React.FC = (): JSX.Element => {
           placeholder="****************"
           value={password}
           setValue={setPassword}
-          containerStyle={{ marginTop: 5}}
+          containerStyle={{ marginTop: 5 }}
           secureTextEntry
         />
 
