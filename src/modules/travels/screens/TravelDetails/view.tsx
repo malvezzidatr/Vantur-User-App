@@ -46,7 +46,7 @@ export const TravelDetailsView: React.FC<Props> = ({ route }): JSX.Element => {
       <Image
         style={{ flex: 1 }}
         source={{ uri: `data:image/png;base64,${travel?.file}` }}
-        resizeMode='cover'
+        resizeMode="cover"
       />
     </View>
   );

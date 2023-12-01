@@ -54,9 +54,7 @@ const TravelCard: React.FC<ITravelCardProps> = ({
         elevation: 8,
       }}
     >
-      <S.TravelImage
-        source={{ uri: image }}
-      />
+      <S.TravelImage source={{ uri: image }} />
       <S.DateContainer>
         <S.Date>14</S.Date>
       </S.DateContainer>

@@ -88,7 +88,7 @@ export const TravelImage = styled.Image`
   width: 100%;
   height: 100%;
   border-radius: 20px;
-`
+`;
 
 export const MiddleContainer = styled.View`
   width: 210px;
@@ -98,4 +98,4 @@ export const MiddleContainer = styled.View`
   padding-top: 25px;
   padding-left: 30px;
   background-color: ${({ theme }) => theme.colors.primary};
-`
+`;
