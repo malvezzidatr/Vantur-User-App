@@ -54,37 +54,20 @@ const TravelCard: React.FC<ITravelCardProps> = ({
         elevation: 8,
       }}
     >
-      <Image
-        style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          borderRadius: 20,
-        }}
+      <S.TravelImage
         source={{ uri: image }}
       />
       <S.DateContainer>
         <S.Date>14</S.Date>
       </S.DateContainer>
 
-      <View
-        style={{
-          width: 210,
-          height: 150,
-          borderRadius: 10,
-          overflow: 'hidden',
-          marginTop: 70,
-          paddingTop: 25,
-          paddingLeft: 30,
-          backgroundColor: '#3A3A50',
-        }}
-      >
+      <S.MiddleContainer>
         <S.Title>{destination}</S.Title>
         <S.OwnerContainer>
           <S.OwnerTitle>Organizador:</S.OwnerTitle>
           <S.Owner>{owner}</S.Owner>
         </S.OwnerContainer>
-      </View>
+      </S.MiddleContainer>
       <S.ButtonContainer>
         <TouchableOpacity onPress={() => setFavorite(!favorite)}>
           <S.FavoriteButton>

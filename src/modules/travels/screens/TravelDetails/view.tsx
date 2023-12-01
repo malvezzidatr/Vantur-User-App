@@ -15,7 +15,7 @@ import { Travel } from '../../services/Travel/interfaces';
 interface Props
   extends NativeStackScreenProps<RootStackParamList, 'TravelDetails'> {}
 
-export const TravelDetailsView: React.FC<Props> = ({ route }) => {
+export const TravelDetailsView: React.FC<Props> = ({ route }): JSX.Element => {
   const { params } = route;
   const [travel, setTravel] = useState<Travel | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -42,10 +42,11 @@ export const TravelDetailsView: React.FC<Props> = ({ route }) => {
   }
 
   return (
-    <View style={{ flex: 2 }}>
+    <View style={{ flex: 1 }}>
       <Image
         style={{ flex: 1 }}
         source={{ uri: `data:image/png;base64,${travel?.file}` }}
+        resizeMode='cover'
       />
     </View>
   );

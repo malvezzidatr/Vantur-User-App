@@ -50,30 +50,35 @@ export const HomeView: React.FC = (): JSX.Element => {
         />
       </S.SearchBarContainer>
       <S.EventTitle>Eventos</S.EventTitle>
-      <FlatList
-        contentContainerStyle={{ paddingHorizontal: 30, paddingVertical: 10 }}
-        showsHorizontalScrollIndicator={false}
-        data={searchResult}
-        keyExtractor={(item) => item.id}
-        horizontal
-        renderItem={({ item, index }) => {
-          return (
-            <S.CardsContainer>
-              <TravelCard
-                value={item?.value}
-                destination={item?.destination}
-                seats={item?.seats}
-                reserveds={item?.confirmeds?.length}
-                owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
-                departure={item?.departure_location}
-                isFavorite={index % 2 === 0 && true}
-                goToDetails={() => goToDetails(item?.id)}
-                image={`data:image/png;base64,${item.file}`}
-              />
-            </S.CardsContainer>
-          );
-        }}
-      />
+      {
+        loading ?
+          <ActivityIndicator color={'#3A3A50'} style={{marginTop: 180}} size={'large'} />
+          :
+          <FlatList
+            contentContainerStyle={{ paddingHorizontal: 30, paddingVertical: 10 }}
+            showsHorizontalScrollIndicator={false}
+            data={searchResult}
+            keyExtractor={(item) => item.id}
+            horizontal
+            renderItem={({ item, index }) => {
+              return (
+                <S.CardsContainer>
+                  <TravelCard
+                    value={item?.value}
+                    destination={item?.destination}
+                    seats={item?.seats}
+                    reserveds={item?.confirmeds?.length}
+                    owner={`${item?.owner?.first_name} ${item?.owner?.last_name}`}
+                    departure={item?.departure_location}
+                    isFavorite={index % 2 === 0 && true}
+                    goToDetails={() => goToDetails(item?.id)}
+                    image={`data:image/png;base64,${item.file}`}
+                  />
+                </S.CardsContainer>
+              );
+            }}
+          />
+      }
     </S.Container>
   );
 };

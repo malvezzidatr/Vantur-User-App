@@ -82,3 +82,20 @@ export const GoToDetailsButton = styled.TouchableOpacity`
   justify-content: center;
   border-radius: 8px;
 `;
+
+export const TravelImage = styled.Image`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+`
+
+export const MiddleContainer = styled.View`
+  width: 210px;
+  height: 150px;
+  border-radius: 10px;
+  margin-top: 70px;
+  padding-top: 25px;
+  padding-left: 30px;
+  background-color: ${({ theme }) => theme.colors.primary};
+`

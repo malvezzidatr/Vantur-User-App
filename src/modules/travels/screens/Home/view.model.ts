@@ -27,6 +27,7 @@ const useHomeViewModel = () => {
   };
 
   const getTravels = async () => {
+    setLoading(true);
     const { data, error } = await getAllTravels();
     if (error?.response?.status === 401) {
       deleteStorageValue('access_token');
@@ -34,6 +35,7 @@ const useHomeViewModel = () => {
     } else {
       setTravels(data);
     }
+    setLoading(false);
   };
 
   const onRefresh = useCallback(() => {
@@ -55,15 +57,6 @@ const useHomeViewModel = () => {
     getTravels();
     getUserData();
   }, []);
-
-  useFocusEffect(
-    useCallback(() => {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 200);
-    }, []),
-  );
 
   useEffect(() => {
     const filteredTravels = travels?.filter(
