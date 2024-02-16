@@ -75,7 +75,7 @@ export const HomeView: React.FC = (): JSX.Element => {
                   departure={item?.departure_location}
                   isFavorite={index % 2 === 0 && true}
                   goToDetails={() => goToDetails(item?.id)}
-                  image={`data:image/png;base64,${item.file}`}
+                  image={`data:image/png;base64,${item.file[0]}`}
                 />
               </S.CardsContainer>
             );
